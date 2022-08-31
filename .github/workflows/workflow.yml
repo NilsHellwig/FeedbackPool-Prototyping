@@ -13,12 +13,13 @@ jobs:
       matrix:
         node-version: [15.x]
 
+    defaults:
+      run:
+        working-directory: ./prototype3
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
-      - name: Jump to directory
-        run: cd prototype3
 
       - name: Install and build
         run: npm install && npm run build
