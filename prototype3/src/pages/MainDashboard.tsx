@@ -1,8 +1,10 @@
 import { DashboardNav } from "../components/DashboardNav";
 import { Header } from "../components/Header";
-import cx from "classnames";
 
-const assignments = [
+import { AssignmentItem } from "../components/AssignmentItem";
+import { IAssignment } from "../types";
+
+const assignments: IAssignment[] = [
   {
     id: 1,
     course: "Greek History 101",
@@ -99,35 +101,7 @@ export const MainDashboard = () => {
           <div className="grid grid-cols-4 justify-items-stretch gap-2 space-y-4 overflow-y-auto w-full">
             {assignments.map((assignment) => {
               return (
-                <div
-                  key={assignment.id}
-                  className="flex flex-col justify-between p-4 bg-white border border-slate-200 rounded-lg space-y-12">
-                  <div className="flex flex-col items-start space-y-4">
-                    <span className="text-xs font-semibold px-2 py-1 rounded-full bg-violet-100 text-violet-600">
-                      {assignment.course}
-                    </span>
-                    <h3 className="text-xl font-normal">{assignment.title}</h3>
-                  </div>
-                  <div className="flex flex-col items-end">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-xs">Feedback:</span>
-                      <span
-                        className={cx(
-                          "text-xs font-semibold rounded-full px-2 py-[2px]",
-                          {
-                            "bg-green-200 text-green-600":
-                              assignment.feedbackStatus === "new",
-                            "bg-yellow-200 text-yellow-600":
-                              assignment.feedbackStatus === "pending",
-                            "bg-blue-200 text-blue-600":
-                              assignment.feedbackStatus === "received",
-                          }
-                        )}>
-                        {assignment.feedbackStatus}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <AssignmentItem assignment={assignment} key={assignment.id} />
               );
             })}
           </div>
