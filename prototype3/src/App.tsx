@@ -3,7 +3,7 @@ import { CreateSubmission, MainDashboard, Submission } from "./pages";
 
 export const App = () => {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename="/FeedbackPool-Prototyping">
       <>
         <Routes>
           <Route path="/submission/create" element={<CreateSubmission />} />
