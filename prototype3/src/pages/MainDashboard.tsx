@@ -98,7 +98,7 @@ export const MainDashboard = () => {
       <main className="flex-grow bg-gray-100 p-8">
         <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
           <DashboardNav />
-          <div className="grid grid-cols-4 justify-items-stretch gap-2 space-y-4 overflow-y-auto w-full">
+          <div className="grid grid-cols-4 items-baseline gap-2 space-y-4 overflow-y-auto w-full">
             {assignments.map((assignment) => {
               return (
                 <AssignmentItem assignment={assignment} key={assignment.id} />
