@@ -3,7 +3,7 @@ import { CreateSubmission, MainDashboard, Submission } from "./pages";
 
 export const App = () => {
   return (
-    <Router basename="/FeedbackPool-Prototyping">
+    <Router>
       <>
         <Routes>
           <Route path="/submission/create" element={<CreateSubmission />} />
