@@ -1,3 +1,9 @@
+import { Header } from "../components/Header";
+
 export const MainDashboard = () => {
-  return <h2>Main Dashboard</h2>;
+  return (
+    <main>
+      <Header />
+    </main>
+  );
 };
