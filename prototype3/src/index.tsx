@@ -1,6 +1,4 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import "./fonts/Inter-Black.woff";
 import "./fonts/Inter-BlackItalic.woff";
 import "./fonts/Inter-Bold.woff";
@@ -19,6 +17,7 @@ import "./fonts/Inter-SemiBold.woff";
 import "./fonts/Inter-SemiBoldItalic.woff";
 import "./fonts/Inter-Thin.woff";
 import "./fonts/Inter-ThinItalic.woff";
+import "./index.css";
 
 import { App } from "./App";
 
