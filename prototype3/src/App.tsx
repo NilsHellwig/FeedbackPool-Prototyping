@@ -6,10 +6,10 @@ export const App = () => {
     <Router basename={process.env.PUBLIC_URL}>
       <>
         <Routes>
-          <Route path="/FeedbackPool-Prototyping/submission/create" element={<CreateSubmission />} />
-          <Route path="/FeedbackPool-Prototyping/submission/:submissionId" element={<Submission />} />
-          <Route path="/FeedbackPool-Prototyping/feedback" element={<MainDashboard />} />
-          <Route path="/FeedbackPool-Prototyping/" element={<MainDashboard />} />
+          <Route path="/submission/create" element={<CreateSubmission />} />
+          <Route path="/submission/:submissionId" element={<Submission />} />
+          <Route path="/feedback" element={<MainDashboard />} />
+          <Route path="/" element={<MainDashboard />} />
         </Routes>
       </>
     </Router>
