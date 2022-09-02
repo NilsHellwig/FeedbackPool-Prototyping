@@ -1,12 +1,5 @@
 import { Check, Pencil, Plus } from "phosphor-react";
-
-interface IFeedbackExtract {
-  id: string;
-  text: string;
-  comment?: string;
-  author: string;
-  inDashboard: boolean;
-}
+import { IFeedbackExtract } from "../types";
 
 interface FeedbackExtractProps {
   feedbackExtract: IFeedbackExtract;

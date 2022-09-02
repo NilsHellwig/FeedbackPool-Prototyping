@@ -1,8 +1,10 @@
-import { Header } from "../components/Header";
-import { CaretLeft, Check, Pencil } from "phosphor-react";
+import { Article, CaretLeft } from "phosphor-react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FeedbackExtract } from "../components/FeedbackExtract";
+import { Header } from "../components/Header";
+import { IFeedbackExtract } from "../types";
 
-const feedbackExtracts = [
+const dummyFeedbackExtracts = [
   {
     id: "1",
     text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
@@ -29,15 +31,67 @@ const feedbackExtracts = [
     author: "Peter Parker",
     inDashboard: false,
   },
-  {
-    id: "5",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
-    inDashboard: false,
-  },
 ];
 
 export const ExtractFeedback = () => {
+  const [selectedText, setSelectedText] = useState("");
+  const [feedbackExtracts, setFeedbackExtracts] = useState<IFeedbackExtract[]>(
+    dummyFeedbackExtracts
+  );
+  const [isCreateSnippetButtonVisible, setIsCreateSnippetButtonVisible] =
+    useState(false);
+  const [createSnippetButtonPosition, setCreateSnippetButtonPosition] =
+    useState({ x: 0, y: 0 });
+  const summaryRef = useRef<HTMLDivElement>(null);
+  const essayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const getSelection = () => {
+      setIsCreateSnippetButtonVisible(false);
+
+      const selectedText = window.getSelection()?.toString();
+      if (!selectedText) {
+        return;
+      }
+
+      setSelectedText(selectedText);
+
+      // Get the range to be able to correctly position the create snippet button
+      const range = window?.getSelection()?.getRangeAt(0);
+
+      if (!range) return;
+      range.collapse(false);
+
+      // Get the bounding rect of the range to be able to position the create snippet button
+      const dummy = document.createElement("span");
+      range.insertNode(dummy);
+
+      const rect = dummy.getBoundingClientRect();
+      const coordinates = {
+        x: rect.left,
+        y: rect.top,
+      };
+
+      if (dummy.parentNode) {
+        dummy.parentNode.removeChild(dummy);
+      }
+
+      setCreateSnippetButtonPosition(coordinates);
+      setIsCreateSnippetButtonVisible(true);
+    };
+
+    if (summaryRef.current) {
+      summaryRef.current.addEventListener("mouseup", getSelection);
+    }
+    if (essayRef.current) {
+      essayRef.current.addEventListener("mouseup", getSelection);
+    }
+
+    return () => {
+      document.removeEventListener("mouseup", getSelection);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col h-screen">
       <Header />
@@ -56,7 +110,9 @@ export const ExtractFeedback = () => {
             </div>
             <div className="space-y-4">
               <h2 className="text-xl font-semibold">Feedback Summary</h2>
-              <div className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6">
+              <div
+                ref={summaryRef}
+                className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -96,7 +152,9 @@ export const ExtractFeedback = () => {
                   Submitted on 04.07.22
                 </span>
               </div>
-              <div className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6">
+              <div
+                ref={essayRef}
+                className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -132,11 +190,60 @@ export const ExtractFeedback = () => {
           </div>
           <aside className="col-span-4 space-y-3">
             {feedbackExtracts.map((extract) => (
-              <FeedbackExtract feedbackExtract={extract} />
+              <FeedbackExtract key={extract.id} feedbackExtract={extract} />
             ))}
           </aside>
         </section>
       </main>
+      {isCreateSnippetButtonVisible && (
+        <CreateFeedbackSnippetButton
+          position={createSnippetButtonPosition}
+          setIsCreateSnippetButtonVisible={setIsCreateSnippetButtonVisible}
+          selectedText={selectedText}
+          setFeedbackExtracts={setFeedbackExtracts}
+        />
+      )}
     </div>
+  );
+};
+
+interface CreateFeedbackSnippetButtonProps {
+  position: { x: number; y: number };
+  setIsCreateSnippetButtonVisible: Dispatch<SetStateAction<boolean>>;
+  selectedText: string;
+  setFeedbackExtracts: Dispatch<SetStateAction<IFeedbackExtract[]>>;
+}
+
+const CreateFeedbackSnippetButton: React.FC<
+  CreateFeedbackSnippetButtonProps
+> = ({
+  position,
+  setIsCreateSnippetButtonVisible,
+  selectedText,
+  setFeedbackExtracts,
+}) => {
+  const handleClick = () => {
+    const feedbackExtract: IFeedbackExtract = {
+      id: "aeoifjaef",
+      author: "John Doe",
+      inDashboard: false,
+      text: selectedText,
+    };
+
+    setFeedbackExtracts((prevFeedbackExtracts) => [
+      ...prevFeedbackExtracts,
+      feedbackExtract,
+    ]);
+    setIsCreateSnippetButtonVisible(false);
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      style={{ top: position.y, left: position.x }}
+      className="absolute flex items-center gap-2 p-2 bg-slate-800/95 text-white rounded">
+      <Article className="text-white" width={14} height={14} />
+      Create Feedback Snippet
+    </button>
   );
 };
