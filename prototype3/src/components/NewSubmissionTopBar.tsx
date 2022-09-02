@@ -19,27 +19,31 @@ export const NewSubmissionTopBar = () => {
         </div>
         <p>Untitled New Submission</p>
       </div>
-      <div className="flex flex-row gap-2">
-        <div className="bg-offWhite hover:bg-lightGrey p-2 rounded-md cursor-pointer">
-          <TextBolder size={20} />
+      <div className="flex flex-row gap-6">
+        <div className="flex flex-row gap-2">
+          <div className="bg-offWhite hover:bg-white p-2 rounded-md cursor-pointer">
+            <TextBolder size={20} />
+          </div>
+          <div className="bg-offWhite hover:bg-white p-2 rounded-md cursor-pointer">
+            <TextItalic size={20} />
+          </div>
+          <div className="bg-offWhite hover:bg-white p-2 rounded-md cursor-pointer">
+            <TextUnderline size={20} />
+          </div>
         </div>
-        <div className="bg-offWhite hover:bg-lightGrey p-2 rounded-md cursor-pointer">
-          <TextItalic size={20} />
-        </div>
-        <div className="bg-offWhite hover:bg-lightGrey p-2 rounded-md cursor-pointer">
-          <TextUnderline size={20} />
-        </div>
-        <div className="bg-offWhite hover:bg-lightGrey p-2 rounded-md cursor-pointer">
-          <TextAlignCenter size={20} />
-        </div>
-        <div className="bg-offWhite hover:bg-lightGrey p-2 rounded-md cursor-pointer">
-          <TextAlignJustify size={20} />
-        </div>
-        <div className="bg-offWhite  hover:bg-lightGrey p-2 rounded-md cursor-pointer">
-          <TextAlignLeft size={20} />
-        </div>
-        <div className="bg-offWhite hover:bg-lightGrey p-2 rounded-md cursor-pointer">
-          <TextAlignRight size={20} />
+        <div className="flex flex-row gap-2">
+          <div className="bg-offWhite hover:bg-white p-2 rounded-md cursor-pointer">
+            <TextAlignCenter size={20} />
+          </div>
+          <div className="bg-offWhite hover:bg-white p-2 rounded-md cursor-pointer">
+            <TextAlignJustify size={20} />
+          </div>
+          <div className="bg-offWhite  hover:bg-white p-2 rounded-md cursor-pointer">
+            <TextAlignLeft size={20} />
+          </div>
+          <div className="bg-offWhite hover:bg-white p-2 rounded-md cursor-pointer">
+            <TextAlignRight size={20} />
+          </div>
         </div>
       </div>
     </div>
