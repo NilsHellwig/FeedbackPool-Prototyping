@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 
 import { AssignmentItem } from "../components/AssignmentItem";
 import { IAssignment } from "../types";
+import { Link } from "react-router-dom";
 
 const assignments: IAssignment[] = [
   {
@@ -101,7 +102,11 @@ export const MainDashboard = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 overflow-y-auto w-full">
             {assignments.map((assignment) => {
               return (
-                <AssignmentItem assignment={assignment} key={assignment.id} />
+                <Link
+                  key={assignment.id}
+                  to={`/submission/${assignment.id}/feedback`}>
+                  <AssignmentItem assignment={assignment} />
+                </Link>
               );
             })}
           </div>

@@ -60,16 +60,18 @@ export const ExtractFeedback = () => {
       const range = window?.getSelection()?.getRangeAt(0);
 
       if (!range) return;
-      range.collapse(false);
+      // range.collapse(false);
 
       // Get the bounding rect of the range to be able to position the create snippet button
       const dummy = document.createElement("span");
       range.insertNode(dummy);
 
       const rect = dummy.getBoundingClientRect();
+      console.log(rect);
+
       const coordinates = {
-        x: rect.left,
-        y: rect.top,
+        x: rect.right,
+        y: rect.top - 50,
       };
 
       if (dummy.parentNode) {
@@ -93,7 +95,7 @@ export const ExtractFeedback = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen relative">
       <Header />
       <main className="flex-grow bg-gray-100 p-8 overflow-y-scroll">
         <section className="grid gap-8 grid-cols-12 max-w-7xl m-auto">
@@ -235,14 +237,16 @@ const CreateFeedbackSnippetButton: React.FC<
       feedbackExtract,
     ]);
     setIsCreateSnippetButtonVisible(false);
+    // Deselect text
+    window.getSelection()?.removeAllRanges();
   };
 
   return (
     <button
       onClick={handleClick}
       style={{ top: position.y, left: position.x }}
-      className="absolute flex items-center gap-2 p-2 bg-slate-800/95 text-white rounded">
-      <Article className="text-white" width={14} height={14} />
+      className="absolute flex items-center gap-2 p-2 bg-slate-800 text-white text-sm border border-slate-600 rounded shadow-lg">
+      <Article width={14} height={14} />
       Create Feedback Snippet
     </button>
   );
