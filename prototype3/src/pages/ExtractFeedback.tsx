@@ -4,6 +4,7 @@ import { CreateFeedbackSnippetButton } from "../components/CreateFeedbackSnippet
 import { FeedbackExtract } from "../components/FeedbackExtract";
 import { Header } from "../components/Header";
 import { IFeedbackExtract } from "../types";
+import { useNavigate } from "react-router-dom";
 
 const dummyFeedbackExtracts = [
   {
@@ -45,6 +46,7 @@ export const ExtractFeedback = () => {
     useState({ x: 0, y: 0 });
   const summaryRef = useRef<HTMLDivElement>(null);
   const essayRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getSelection = () => {
@@ -102,7 +104,9 @@ export const ExtractFeedback = () => {
         <section className="flex flex-grow gap-8 h-full max-w-7xl m-auto">
           <div className="flex flex-col space-y-8">
             <div className="flex items-center gap-4">
-              <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md">
+              <button
+                onClick={() => navigate(-1)}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md">
                 <CaretLeft fill="#fff" width={18} height={18} weight="bold" />
                 Back
               </button>
