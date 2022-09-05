@@ -72,10 +72,72 @@ export const FeedbackDashboard = () => {
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
       <div className="flex flex-col h-screen">
         <Header />
-        <main className="flex-grow bg-gray-100 p-8">
-          <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
-            <div>
-              <Droppable droppableId={"sidebar"} key={columns["sidebar"].name}>
+        <div className="flex flex-grow">
+          <main className="flex-grow bg-gray-200 p-8">
+            <DashboardNav />
+            <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
+                <Droppable
+                  droppableId={"sidebar"}
+                  key={columns["sidebar"].name}>
+                  {(provided, snapshot) => {
+                    return (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        style={{
+                          background: snapshot.isDraggingOver
+                            ? "lightblue"
+                            : "lightgrey",
+                          padding: 4,
+                          width: 250,
+                          minHeight: 500,
+                        }}>
+                        {columns["sidebar"].items.map((item: any, index) => {
+                          return (
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}>
+                              {(provided, snapshot) => {
+                                return (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={{
+                                      userSelect: "none",
+                                      padding: 16,
+                                      margin: "0 0 8px 0",
+                                      minHeight: "50px",
+                                      backgroundColor: snapshot.isDragging
+                                        ? "#263B4A"
+                                        : "#456C86",
+                                      color: "white",
+                                      ...provided.draggableProps.style,
+                                    }}>
+                                    {item.content}
+                                  </div>
+                                );
+                              }}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    );
+                  }}
+                </Droppable>
+            </section>
+          </main>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}>
+            <h2>{columns["pool"].name}</h2>
+            <div style={{ margin: 8 }}>
+              <Droppable droppableId={"pool"} key={columns["pool"].name}>
                 {(provided, snapshot) => {
                   return (
                     <div
@@ -89,7 +151,7 @@ export const FeedbackDashboard = () => {
                         width: 250,
                         minHeight: 500,
                       }}>
-                      {columns["sidebar"].items.map((item:any, index) => {
+                      {columns["pool"].items.map((item, index) => {
                         return (
                           <Draggable
                             key={item.id}
@@ -125,68 +187,8 @@ export const FeedbackDashboard = () => {
                 }}
               </Droppable>
             </div>
-            <DashboardNav />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}>
-              <h2>{columns["pool"].name}</h2>
-              <div style={{ margin: 8 }}>
-                <Droppable droppableId={"pool"} key={columns["pool"].name}>
-                  {(provided, snapshot) => {
-                    return (
-                      <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver
-                            ? "lightblue"
-                            : "lightgrey",
-                          padding: 4,
-                          width: 250,
-                          minHeight: 500,
-                        }}>
-                        {columns["pool"].items.map((item, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}>
-                              {(provided, snapshot) => {
-                                return (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: "none",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
-                                      minHeight: "50px",
-                                      backgroundColor: snapshot.isDragging
-                                        ? "#263B4A"
-                                        : "#456C86",
-                                      color: "white",
-                                      ...provided.draggableProps.style,
-                                    }}>
-                                    {item.content}
-                                  </div>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    );
-                  }}
-                </Droppable>
-              </div>
-            </div>
-          </section>
-        </main>
+          </div>
+        </div>
       </div>
     </DragDropContext>
   );
