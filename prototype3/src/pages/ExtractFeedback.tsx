@@ -1,46 +1,14 @@
 import { CaretLeft, CaretRight } from "phosphor-react";
 import { useEffect, useRef, useState } from "react";
-import { CreateFeedbackSnippetButton } from "../components/CreateFeedbackSnippetButton";
-import { FeedbackExtract } from "../components/FeedbackExtract";
-import { Header } from "../components/Header";
-import { IFeedbackExtract } from "../types";
 import { useNavigate } from "react-router-dom";
+import { CreateFeedbackSnippetButton } from "../components/CreateFeedbackSnippetButton";
+import { ExtractFeedbackSidebar } from "../components/ExtractFeedbackSidebar";
+import { Header } from "../components/Header";
 import { useOutsideClick } from "../hooks/use-outside-click";
-
-const dummyFeedbackExtracts = [
-  {
-    id: "1",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
-    inDashboard: false,
-  },
-  {
-    id: "2",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
-    inDashboard: true,
-  },
-  {
-    id: "3",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
-    comment:
-      "Accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    inDashboard: true,
-  },
-  {
-    id: "4",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
-    inDashboard: false,
-  },
-];
 
 export const ExtractFeedback = () => {
   const [selectedText, setSelectedText] = useState("");
-  const [feedbackExtracts, setFeedbackExtracts] = useState<IFeedbackExtract[]>(
-    dummyFeedbackExtracts
-  );
+
   const [isCreateSnippetButtonVisible, setIsCreateSnippetButtonVisible] =
     useState(false);
   const [createSnippetButtonPosition, setCreateSnippetButtonPosition] =
@@ -49,6 +17,8 @@ export const ExtractFeedback = () => {
   const summaryRef = useRef<HTMLDivElement>(null);
   const essayRef = useRef<HTMLDivElement>(null);
   const createSnippetButtonRef = useRef<HTMLButtonElement>(null);
+  const createSnippetButtonWidth =
+    createSnippetButtonRef.current?.offsetWidth || 0;
 
   useOutsideClick(createSnippetButtonRef, () => {
     setIsCreateSnippetButtonVisible(false);
@@ -82,9 +52,6 @@ export const ExtractFeedback = () => {
 
       const rect = dummy.getBoundingClientRect();
 
-      const createSnippetButtonWidth =
-        createSnippetButtonRef.current?.offsetWidth || 0;
-
       const coordinates = {
         x: rect.left + rect.width / 2 - createSnippetButtonWidth / 2,
         y: rect.top - 50,
@@ -108,7 +75,7 @@ export const ExtractFeedback = () => {
     return () => {
       document.removeEventListener("mouseup", getSelection);
     };
-  }, []);
+  }, [createSnippetButtonWidth]);
 
   return (
     <div className="flex flex-col h-screen relative">
@@ -216,11 +183,7 @@ export const ExtractFeedback = () => {
               </div>
             </div>
           </div>
-          <aside className="min-w-[400px] space-y-3 overflow-y-auto ">
-            {feedbackExtracts.map((extract) => (
-              <FeedbackExtract key={extract.id} feedbackExtract={extract} />
-            ))}
-          </aside>
+          <ExtractFeedbackSidebar />
         </section>
       </main>
       {isCreateSnippetButtonVisible && (
@@ -229,7 +192,6 @@ export const ExtractFeedback = () => {
           position={createSnippetButtonPosition}
           setIsCreateSnippetButtonVisible={setIsCreateSnippetButtonVisible}
           selectedText={selectedText}
-          setFeedbackExtracts={setFeedbackExtracts}
         />
       )}
     </div>

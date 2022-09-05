@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { useHover } from "../hooks/use-hover";
 import { IFeedbackExtract } from "../types";
 import cx from "classnames";
+import { useSnippets } from "../contexts/SnippetContext";
 
 interface FeedbackExtractProps {
   feedbackExtract: IFeedbackExtract;
@@ -12,11 +13,27 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   feedbackExtract,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [snippet, setSnippet] = useState(feedbackExtract.text || "");
   const [comment, setComment] = useState(feedbackExtract.comment || "");
   const addButtonRef = useRef<HTMLButtonElement>(null);
   const [isAddHovering] = useHover(addButtonRef);
 
+  const { setSnippets } = useSnippets();
+
   const handleSave = () => {
+    const updatedSnippet: IFeedbackExtract = {
+      ...feedbackExtract,
+      text: snippet,
+      comment,
+    };
+
+    setSnippets((prev) => {
+      const index = prev.findIndex((s) => s.id === feedbackExtract.id);
+      const updatedSnippets = [...prev];
+      updatedSnippets[index] = updatedSnippet;
+      return updatedSnippets;
+    });
+
     setIsEditing(false);
   };
 
@@ -27,7 +44,19 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
 
   return (
     <div className="bg-white border border-slate-200 hover:border-slate-400 transition-all rounded-lg">
-      <p className="p-4 text-sm text-slate-700">{feedbackExtract.text}</p>
+      {isEditing ? (
+        <div className="p-4 space-y-2">
+          <h3>Extracted Snippet</h3>
+          <textarea
+            placeholder="Add a comment"
+            className="p-4 text-sm text-slate-700 w-full min-h-[150px] flex items-start border border-slate-200 rounded"
+            defaultValue={snippet}
+            onChange={(e) => setSnippet(e.target.value)}
+          />
+        </div>
+      ) : (
+        <p className="p-4 text-sm text-slate-700">{snippet}</p>
+      )}
       {feedbackExtract.comment && !isEditing && (
         <div className="px-4 pb-4">
           <p className="p-4 text-sm text-slate-700 bg-slate-100 border border-slate-200 rounded">
@@ -37,15 +66,16 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
       )}
       {isEditing && (
         <>
-          <div className="px-4 pb-4">
+          <div className="px-4 pb-4 space-y-1">
+            <h3 className="text-sm text-slate-500">Comment:</h3>
             <textarea
               placeholder="Add a comment"
-              className="p-4 text-sm text-slate-700 w-full min-h-[150px] flex items-start border border-slate-200 rounded"
+              className="p-4 text-sm bg-slate-100 text-slate-700 w-full min-h-[100px] flex items-start border border-slate-200 rounded"
               defaultValue={comment}
               onChange={(e) => setComment(e.target.value)}
             />
           </div>
-          <div className="flex items-center justify-end gap-2 px-4 py-2 border-t border-slate-300">
+          <div className="flex items-center justify-end gap-2 px-4 py-2 border-t border-slate-200">
             <button
               onClick={handleAbort}
               className="flex items-center gap-2 px-3 py-2 border border-red-600 text-red-600 bg-red-100 rounded-md text-sm">
@@ -56,7 +86,7 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
               onClick={handleSave}
               className="flex items-center gap-2 px-3 py-2 border border-green-600 text-green-600 bg-green-100 rounded-md text-sm">
               <Check width={14} height={14} weight="bold" />
-              Save Comment
+              Save Changes
             </button>
           </div>
         </>
