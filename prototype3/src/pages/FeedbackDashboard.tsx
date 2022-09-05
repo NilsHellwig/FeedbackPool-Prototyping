@@ -176,7 +176,7 @@ export const FeedbackDashboard = () => {
               </div>
             </div>
 
-            <div className="h-full w-[410px]">
+            <div className="w-[410px]">
               {columns["sidebar"].items.length < 1 && !dragIsActive ? (
                 <div className="flex flex-col items-center gap-4 my-8 mx-4 text-center">
                   <img
