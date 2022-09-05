@@ -8,13 +8,27 @@ import { useState } from "react";
 import { DotsSixVertical, Plus } from "phosphor-react";
 import uuid from "react-uuid";
 import cx from "classnames";
+import { DraggableFeedbackSnippet } from "../components/DragabbleFeedbackSnippet";
 
 const itemsFromBackend = [
-  { id: uuid(), content: "First task" },
-  { id: uuid(), content: "Second task" },
-  { id: uuid(), content: "Third task" },
-  { id: uuid(), content: "Fourth task" },
-  { id: uuid(), content: "Fifth task" },
+  {
+    id: uuid(),
+    extractedText: "First task",
+    meta: ["Geography", "Essay"],
+    labels: ["structuring", "deserts"],
+  },
+  {
+    id: uuid(),
+    extractedText: "Second task",
+    meta: ["Greek Methodology", "Essay"],
+    labels: ["structuring", "deserts"],
+  },
+  {
+    id: uuid(),
+    extractedText: "Third task",
+    meta: ["Critical Thinking", "Essay"],
+    labels: ["structuring", "deserts"],
+  },
 ];
 
 const columnsFromBackend = {
@@ -76,21 +90,14 @@ export const FeedbackDashboard = () => {
         <div className="flex flex-grow">
           <main className="flex-grow bg-gray-200 p-8">
             <DashboardNav />
-            <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
-              <Droppable droppableId={"pool"} key={columns["pool"].name}>
+            <section className="flex flex-col mt-6">
+              <Droppable droppableId={"pool"} key={columns["pool"].name} direction="horizontal">
                 {(provided, snapshot) => {
                   return (
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      style={{
-                        background: snapshot.isDraggingOver
-                          ? "lightblue"
-                          : "lightgrey",
-                        padding: 4,
-                        width: 250,
-                        minHeight: 500,
-                      }}>
+                      className="flex gap-2">
                       {columns["pool"].items.map((item, index) => {
                         return (
                           <Draggable
@@ -102,19 +109,12 @@ export const FeedbackDashboard = () => {
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={{
-                                    userSelect: "none",
-                                    padding: 16,
-                                    margin: "0 0 8px 0",
-                                    minHeight: "50px",
-                                    backgroundColor: snapshot.isDragging
-                                      ? "#263B4A"
-                                      : "#456C86",
-                                    color: "white",
-                                    ...provided.draggableProps.style,
-                                  }}>
-                                  {item.content}
+                                  {...provided.dragHandleProps}>
+                                  <DraggableFeedbackSnippet
+                                    extractedText={item.extractedText}
+                                    meta={item.meta}
+                                    labels={item.labels}
+                                  />
                                 </div>
                               );
                             }}
@@ -143,9 +143,12 @@ export const FeedbackDashboard = () => {
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      className={cx("w-[300px] h-full p-2", {
-                        "bg-offWhite rounded-md": snapshot.isDraggingOver,
-                      })}>
+                      className={cx(
+                        "flex flex-col gap-2 min-w-[300px] h-full p-2 rounded-xl",
+                        {
+                          "bg-offWhite rounded-md": snapshot.isDraggingOver,
+                        }
+                      )}>
                       {columns["sidebar"].items.map((item: any, index) => {
                         return (
                           <Draggable
@@ -157,19 +160,12 @@ export const FeedbackDashboard = () => {
                                 <div
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={{
-                                    userSelect: "none",
-                                    padding: 16,
-                                    margin: "0 0 8px 0",
-                                    minHeight: "50px",
-                                    backgroundColor: snapshot.isDragging
-                                      ? "#263B4A"
-                                      : "#456C86",
-                                    color: "white",
-                                    ...provided.draggableProps.style,
-                                  }}>
-                                  {item.content}
+                                  {...provided.dragHandleProps}>
+                                  <DraggableFeedbackSnippet
+                                    extractedText={item.extractedText}
+                                    meta={item.meta}
+                                    labels={item.labels}
+                                  />
                                 </div>
                               );
                             }}
