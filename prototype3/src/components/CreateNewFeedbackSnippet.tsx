@@ -1,6 +1,7 @@
 import { Check, X } from "phosphor-react";
 import { useState } from "react";
 import { IFeedbackExtract } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreateNewFeedbackSnippetProps {
   handleAbort: () => void;
@@ -33,7 +34,7 @@ export const CreateNewFeedbackSnippet: React.FC<
         <button
           onClick={() => {
             const snippet: IFeedbackExtract = {
-              id: Math.random().toString(36).substr(2, 9),
+              id: uuidv4(),
               text: snippetText,
               author: "John Doe",
               inDashboard: false,

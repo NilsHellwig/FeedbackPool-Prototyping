@@ -18,8 +18,7 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   const [snippet, setSnippet] = useState(feedbackExtract.text || "");
   const [comment, setComment] = useState(feedbackExtract.comment || "");
 
-  const addButtonRef = useRef<HTMLButtonElement>(null);
-  const [isAddHovering] = useHover(addButtonRef);
+  const [addButtonRef, isAddHovering] = useHover<HTMLButtonElement>();
   const isOwnSnippet = feedbackExtract.author === "John Doe";
 
   const { snippets, setSnippets } = useSnippets();
@@ -44,6 +43,54 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   const handleAbort = () => {
     setIsEditing(false);
     setComment(feedbackExtract.comment || "");
+  };
+
+  const toggleFromDashboard = (snippetId: string) => {
+    setSnippets((prevSnippets) => {
+      return prevSnippets.map((prevSnippet) => {
+        if (prevSnippet.id === snippetId) {
+          return {
+            ...prevSnippet,
+            inDashboard: !prevSnippet.inDashboard,
+          };
+        }
+        return prevSnippet;
+      });
+    });
+  };
+
+  const renderAddRemoveButtons = () => {
+    const isSnippetInDashboard = feedbackExtract.inDashboard;
+
+    if (!isSnippetInDashboard) {
+      return (
+        <>
+          <Plus
+            className="text-slate-900"
+            width={14}
+            height={14}
+            weight="bold"
+          />
+          <span>Add</span>
+        </>
+      );
+    } else {
+      if (isAddHovering) {
+        return (
+          <>
+            <X width={18} height={18} weight="bold" />
+            <span>Remove</span>
+          </>
+        );
+      } else {
+        return (
+          <>
+            <Check width={18} height={18} weight="bold" />
+            <span>Added</span>
+          </>
+        );
+      }
+    }
   };
 
   return (
@@ -103,40 +150,21 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
             {feedbackExtract.author}
           </span>
           <div className="flex gap-2">
-            {feedbackExtract.inDashboard && (
-              <button
-                ref={addButtonRef}
-                className={cx(
-                  "flex items-center gap-2 px-3 py-2 rounded-md text-sm",
-                  {
-                    "bg-green-500 text-white": !isAddHovering,
-                    "bg-red-100 text-red-500": isAddHovering,
-                  }
-                )}>
-                {isAddHovering ? (
-                  <>
-                    <X width={18} height={18} weight="bold" />
-                    <span>Remove</span>
-                  </>
-                ) : (
-                  <>
-                    <Check width={18} height={18} weight="bold" />
-                    <span>Added</span>
-                  </>
-                )}
-              </button>
-            )}
-            {!feedbackExtract.inDashboard && (
-              <button className="flex items-center gap-2 px-3 py-2 border border-slate-300 rounded-md text-sm">
-                <Plus
-                  className="text-slate-900"
-                  width={14}
-                  height={14}
-                  weight="bold"
-                />
-                Add
-              </button>
-            )}
+            <button
+              onClick={() => toggleFromDashboard(feedbackExtract.id)}
+              ref={addButtonRef}
+              className={cx(
+                "flex items-center gap-2 px-3 py-2 border rounded-md text-sm",
+                {
+                  "bg-green-500 border-green-500 text-white":
+                    !isAddHovering && feedbackExtract.inDashboard,
+                  "bg-red-100 border-red-100 text-red-500":
+                    isAddHovering && feedbackExtract.inDashboard,
+                  "bg-white border-slate-300": !feedbackExtract.inDashboard,
+                }
+              )}>
+              {renderAddRemoveButtons()}
+            </button>
             <button
               onClick={() => {
                 setIsEditing(true);
@@ -144,7 +172,7 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
                   scrollToEndOfList();
                 }
               }}
-              className="bg-slate-200 p-2 rounded-md">
+              className="bg-slate-200 hover:bg-slate-300 p-2 rounded-md">
               <Pencil
                 className="text-slate-500"
                 width={18}

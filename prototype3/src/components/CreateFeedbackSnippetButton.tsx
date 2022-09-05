@@ -2,6 +2,7 @@ import { Article } from "phosphor-react";
 import { Dispatch, forwardRef, SetStateAction } from "react";
 import { useSnippets } from "../contexts/SnippetContext";
 import { IFeedbackExtract } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 interface CreateFeedbackSnippetButtonProps {
   position: { x: number; y: number };
@@ -16,17 +17,14 @@ export const CreateFeedbackSnippetButton = forwardRef<
   const { setSnippets } = useSnippets();
 
   const handleClick = () => {
-    const feedbackExtract: IFeedbackExtract = {
-      id: "aeoifjaef",
+    const snippet: IFeedbackExtract = {
+      id: uuidv4(),
+      text: selectedText,
       author: "John Doe",
       inDashboard: false,
-      text: selectedText,
     };
 
-    setSnippets((prevFeedbackExtracts) => [
-      ...prevFeedbackExtracts,
-      feedbackExtract,
-    ]);
+    setSnippets((prevFeedbackExtracts) => [...prevFeedbackExtracts, snippet]);
     setIsCreateSnippetButtonVisible(false);
     // Deselect text
     window.getSelection()?.removeAllRanges();
