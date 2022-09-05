@@ -15,27 +15,30 @@ export const DraggableFeedbackSnippet: React.FC<
   return (
     <div>
       <div
-        className="flex flex-col justify-between p-4 gap-4 border bg-white rounded-md w-[400px] draggable-pointer-cursor "
+        className="flex flex-col justify-between p-4 gap-4 border bg-white rounded-md w-[400px] h-[300px] cursor-pointer"
         onClick={() => {
           setPopupIsOpened(true);
         }}>
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-row gap-2 items-center">
-            {metaDataList.map((meta, idx) => {
-              return (
-                <span
-                  key={idx.toString()}
-                  className="flex flex-row items-center gap-2 p-1 px-2 bg-offWhite text-darkGrey rounded-full text-xs">
-                  {meta}
-                </span>
-              );
-            })}
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-row gap-2 items-center">
+              {metaDataList.map((meta, idx) => {
+                return (
+                  <span
+                    key={idx.toString()}
+                    className="flex flex-row items-center gap-2 p-1 px-2 bg-offWhite text-darkGrey rounded-full text-xs">
+                    {meta}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="cursor-grabbing">
+              <DotsSixVertical size={20} />
+            </div>
           </div>
-          <div className="cursor-grabbing">
-            <DotsSixVertical size={20} />
-          </div>
+          <p className="text-justify line-clamp-6">{extractedText}</p>
         </div>
-        <p className="text-justify line-clamp-6">{extractedText}</p>
+
         <div>
           <div className="flex flex-row gap-2">
             {labels.map((label, idx) => {

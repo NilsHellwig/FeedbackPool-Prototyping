@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.draggable-pointer-cursor  {
-  cursor: pointer;
-}
 
 @font-face {
   font-family: "Inter";
