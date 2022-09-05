@@ -1,10 +1,11 @@
-import { CaretLeft } from "phosphor-react";
+import { CaretLeft, CaretRight } from "phosphor-react";
 import { useEffect, useRef, useState } from "react";
 import { CreateFeedbackSnippetButton } from "../components/CreateFeedbackSnippetButton";
 import { FeedbackExtract } from "../components/FeedbackExtract";
 import { Header } from "../components/Header";
 import { IFeedbackExtract } from "../types";
 import { useNavigate } from "react-router-dom";
+import { useOutsideClick } from "../hooks/use-outside-click";
 
 const dummyFeedbackExtracts = [
   {
@@ -46,6 +47,14 @@ export const ExtractFeedback = () => {
     useState({ x: 0, y: 0 });
   const summaryRef = useRef<HTMLDivElement>(null);
   const essayRef = useRef<HTMLDivElement>(null);
+  const createSnippetButtonRef = useRef<HTMLButtonElement>(null);
+
+  useOutsideClick(createSnippetButtonRef, () => {
+    setIsCreateSnippetButtonVisible(false);
+    // Deselect text
+    window.getSelection()?.removeAllRanges();
+  });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,13 +76,16 @@ export const ExtractFeedback = () => {
 
       // Get the bounding rect of the range to be able to position the create snippet button
       const dummy = document.createElement("span");
+      dummy.innerHTML = selectedText;
       range.insertNode(dummy);
 
       const rect = dummy.getBoundingClientRect();
-      console.log(rect);
+
+      const createSnippetButtonWidth =
+        createSnippetButtonRef.current?.offsetWidth || 0;
 
       const coordinates = {
-        x: rect.right,
+        x: rect.left + rect.width / 2 - createSnippetButtonWidth / 2,
         y: rect.top - 50,
       };
 
@@ -112,6 +124,12 @@ export const ExtractFeedback = () => {
               </button>
               <div className="flex flex-row items-center gap-2 text-sm">
                 <span className="text-gray-500">Essay Greek Mythology</span>
+                <CaretRight
+                  className="text-gray-500"
+                  width={14}
+                  height={14}
+                  weight="bold"
+                />
                 <span className="text-violet-600">Feedback</span>
               </div>
             </div>
@@ -206,6 +224,7 @@ export const ExtractFeedback = () => {
       </main>
       {isCreateSnippetButtonVisible && (
         <CreateFeedbackSnippetButton
+          ref={createSnippetButtonRef}
           position={createSnippetButtonPosition}
           setIsCreateSnippetButtonVisible={setIsCreateSnippetButtonVisible}
           selectedText={selectedText}
