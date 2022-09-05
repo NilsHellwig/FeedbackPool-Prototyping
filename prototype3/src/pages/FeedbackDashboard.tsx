@@ -14,20 +14,20 @@ const itemsFromBackend = [
   {
     id: uuid(),
     extractedText: "First task",
-    meta: ["Geography", "Essay"],
-    labels: ["structuring", "deserts"],
+    metaDataList: ["Geography", "Essay"],
+    labels: ["history", "deserts"],
   },
   {
     id: uuid(),
     extractedText: "Second task",
-    meta: ["Greek Methodology", "Essay"],
-    labels: ["structuring", "deserts"],
+    metaDataList: ["Greek Mythology", "Essay"],
+    labels: ["structuring"],
   },
   {
     id: uuid(),
     extractedText: "Third task",
-    meta: ["Critical Thinking", "Essay"],
-    labels: ["structuring", "deserts"],
+    metaDataList: ["Critical Thinking", "Essay"],
+    labels: ["victory", "deserts"],
   },
 ];
 
@@ -88,10 +88,13 @@ export const FeedbackDashboard = () => {
       <div className="flex flex-col h-screen">
         <Header />
         <div className="flex flex-grow">
-          <main className="flex-grow bg-gray-200 p-8">
-            <DashboardNav />
-            <section className="flex flex-col mt-6">
-              <Droppable droppableId={"pool"} key={columns["pool"].name} direction="horizontal">
+          <main className="flex-grow bg-gray-100 p-8">
+            <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
+              <DashboardNav />
+              <Droppable
+                droppableId={"pool"}
+                key={columns["pool"].name}
+                direction="horizontal">
                 {(provided, snapshot) => {
                   return (
                     <div
@@ -112,7 +115,7 @@ export const FeedbackDashboard = () => {
                                   {...provided.dragHandleProps}>
                                   <DraggableFeedbackSnippet
                                     extractedText={item.extractedText}
-                                    meta={item.meta}
+                                    metaDataList={item.metaDataList}
                                     labels={item.labels}
                                   />
                                 </div>
@@ -163,7 +166,7 @@ export const FeedbackDashboard = () => {
                                   {...provided.dragHandleProps}>
                                   <DraggableFeedbackSnippet
                                     extractedText={item.extractedText}
-                                    meta={item.meta}
+                                    metaDataList={item.metaDataList}
                                     labels={item.labels}
                                   />
                                 </div>
