@@ -9,7 +9,7 @@ export const App = () => {
         <Routes>
           <Route path="/submission/create" element={<CreateSubmission />} />
           <Route path="/submission/:submissionId" element={<Submission />} />
-          <Route path="/feedback" element={<FeedbackDashboard />} />
+          <Route path="/feedback-dashboard" element={<FeedbackDashboard />} />
           <Route path="/" element={<MainDashboard />} />
         </Routes>
       </>

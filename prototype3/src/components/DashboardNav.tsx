@@ -7,8 +7,8 @@ const navItems = [
     link: "/",
   },
   {
-    name: "Feedback",
-    link: "/feedback",
+    name: "Feedback-Dashboard",
+    link: "/feedback-dashboard",
   },
 ];
 
