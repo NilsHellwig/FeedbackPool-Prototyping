@@ -45,6 +45,7 @@ export const ExtractFeedback = () => {
     useState(false);
   const [createSnippetButtonPosition, setCreateSnippetButtonPosition] =
     useState({ x: 0, y: 0 });
+
   const summaryRef = useRef<HTMLDivElement>(null);
   const essayRef = useRef<HTMLDivElement>(null);
   const createSnippetButtonRef = useRef<HTMLButtonElement>(null);
