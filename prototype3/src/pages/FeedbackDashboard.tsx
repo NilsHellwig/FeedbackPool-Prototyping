@@ -5,8 +5,9 @@ import { Header } from "../components/Header";
 import { AssignmentItem } from "../components/AssignmentItem";
 import { IAssignment } from "../types";
 import { useState } from "react";
-import { DotsSixVertical } from "phosphor-react";
+import { DotsSixVertical, Plus } from "phosphor-react";
 import uuid from "react-uuid";
+import cx from "classnames";
 
 const itemsFromBackend = [
   { id: uuid(), content: "First task" },
@@ -76,67 +77,6 @@ export const FeedbackDashboard = () => {
           <main className="flex-grow bg-gray-200 p-8">
             <DashboardNav />
             <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
-                <Droppable
-                  droppableId={"sidebar"}
-                  key={columns["sidebar"].name}>
-                  {(provided, snapshot) => {
-                    return (
-                      <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver
-                            ? "lightblue"
-                            : "lightgrey",
-                          padding: 4,
-                          width: 250,
-                          minHeight: 500,
-                        }}>
-                        {columns["sidebar"].items.map((item: any, index) => {
-                          return (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}>
-                              {(provided, snapshot) => {
-                                return (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: "none",
-                                      padding: 16,
-                                      margin: "0 0 8px 0",
-                                      minHeight: "50px",
-                                      backgroundColor: snapshot.isDragging
-                                        ? "#263B4A"
-                                        : "#456C86",
-                                      color: "white",
-                                      ...provided.draggableProps.style,
-                                    }}>
-                                    {item.content}
-                                  </div>
-                                );
-                              }}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    );
-                  }}
-                </Droppable>
-            </section>
-          </main>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}>
-            <h2>{columns["pool"].name}</h2>
-            <div style={{ margin: 8 }}>
               <Droppable droppableId={"pool"} key={columns["pool"].name}>
                 {(provided, snapshot) => {
                   return (
@@ -152,6 +92,61 @@ export const FeedbackDashboard = () => {
                         minHeight: 500,
                       }}>
                       {columns["pool"].items.map((item, index) => {
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}>
+                            {(provided, snapshot) => {
+                              return (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                  style={{
+                                    userSelect: "none",
+                                    padding: 16,
+                                    margin: "0 0 8px 0",
+                                    minHeight: "50px",
+                                    backgroundColor: snapshot.isDragging
+                                      ? "#263B4A"
+                                      : "#456C86",
+                                    color: "white",
+                                    ...provided.draggableProps.style,
+                                  }}>
+                                  {item.content}
+                                </div>
+                              );
+                            }}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  );
+                }}
+              </Droppable>
+            </section>
+          </main>
+          <div className="flex flex-col p-4">
+            <div className="flex justify-between flex-row items-center py-4">
+              <span className="text-base">Feedback Snippets</span>
+              <div className="p-1 bg-darkGrey rounded-md cursor-pointer">
+                <Plus className="text-white" size={20} />
+              </div>
+            </div>
+
+            <div className="h-full">
+              <Droppable droppableId={"sidebar"} key={columns["sidebar"].name}>
+                {(provided, snapshot) => {
+                  return (
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      className={cx("w-[300px] h-full p-2", {
+                        "bg-offWhite rounded-md": snapshot.isDraggingOver,
+                      })}>
+                      {columns["sidebar"].items.map((item: any, index) => {
                         return (
                           <Draggable
                             key={item.id}
