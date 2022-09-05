@@ -12,7 +12,7 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   feedbackExtract,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(feedbackExtract.text || "");
+  const [comment, setComment] = useState(feedbackExtract.comment || "");
   const addButtonRef = useRef<HTMLButtonElement>(null);
   const [isAddHovering] = useHover(addButtonRef);
 
@@ -22,7 +22,7 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
 
   const handleAbort = () => {
     setIsEditing(false);
-    setText(feedbackExtract.comment || "");
+    setComment(feedbackExtract.comment || "");
   };
 
   return (
@@ -41,8 +41,8 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
             <textarea
               placeholder="Add a comment"
               className="p-4 text-sm text-slate-700 w-full min-h-[150px] flex items-start border border-slate-200 rounded"
-              defaultValue={text}
-              onChange={(e) => setText(e.target.value)}
+              defaultValue={comment}
+              onChange={(e) => setComment(e.target.value)}
             />
           </div>
           <div className="flex items-center justify-end gap-2 px-4 py-2 border-t border-slate-300">
