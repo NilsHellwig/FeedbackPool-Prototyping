@@ -5,7 +5,7 @@ import { Header } from "../components/Header";
 import { AssignmentItem } from "../components/AssignmentItem";
 import { IAssignment } from "../types";
 import { useState } from "react";
-import { DotsSixVertical, Plus } from "phosphor-react";
+import { CaretDown, DotsSixVertical, MagnifyingGlass, Plus } from "phosphor-react";
 import uuid from "react-uuid";
 import cx from "classnames";
 import { DraggableFeedbackSnippet } from "../components/DragabbleFeedbackSnippet";
@@ -36,11 +36,11 @@ const itemsFromBackend = [
 
 const columnsFromBackend = {
   pool: {
-    name: "Pool",
+    name: "pool",
     items: itemsFromBackend,
   },
   sidebar: {
-    name: "Sidebar",
+    name: "sidebar",
     items: [],
   },
 };
@@ -84,16 +84,50 @@ const onDragEnd = (result: any, columns: any, setColumns: any) => {
 
 export const FeedbackDashboard = () => {
   const [columns, setColumns] = useState(columnsFromBackend);
+  const [dragIsActive, setDragIsActive] = useState(false);
 
   return (
     <DragDropContext
-      onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
+      onDragEnd={(result) => {
+        setDragIsActive(false);
+        onDragEnd(result, columns, setColumns);
+      }}
+      onDragStart={() => {
+        setDragIsActive(true);
+      }}>
       <div className="flex flex-col h-screen">
         <Header />
         <div className="flex flex-grow">
           <main className="flex-grow bg-gray-100 p-8">
-            <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
-              <DashboardNav />
+            <section className="flex flex-col items-start max-w-7xl m-auto space-y-4">
+              <div className="flex flex-row items-center justify-between w-full">
+                <DashboardNav />
+                <div className="flex flex-row items-center gap-4 p-1 px-3 rounded-full border border-gray-400">
+                  <MagnifyingGlass size={18} />
+                  <span>Search for Feedback Snippet...</span>
+                </div>
+              </div>
+              <div className="flex flex-row items-center justify-between w-full">
+                <div className="flex flex-row gap-4 items-center">
+                  <div className="flex flex-row items-center gap-2 text-white bg-darkGrey p-2 px-3 rounded-full">
+                    <span>Type</span>
+                    <CaretDown weight="fill" size={16} />
+                  </div>
+                  <div className="flex flex-row items-center gap-2 text-white bg-darkGrey p-2 px-3 rounded-full">
+                    <span>Course</span>
+                    <CaretDown weight="fill" size={16} />
+                  </div>
+                  <div className="flex flex-row items-center gap-2 text-white bg-darkGrey p-2 px-3 rounded-full">
+                    <span>Label</span>
+                    <CaretDown weight="fill" size={16} />
+                  </div>
+                  <span className="text-mediumGrey">(no labels selected)</span>
+                </div>
+                <div className="flex flex-row gap-4">
+                  <span>Multi-selection</span>
+                  <div className="w-5 h-5 bg-lightGrey border border-gray-400 rounded-md cursor-pointer"></div>
+                </div>
+              </div>
               <Droppable
                 droppableId={"pool"}
                 key={columns["pool"].name}
@@ -142,7 +176,22 @@ export const FeedbackDashboard = () => {
               </div>
             </div>
 
-            <div className="h-full">
+            <div className="h-full w-[410px]">
+              {columns["sidebar"].items.length < 1 && !dragIsActive ? (
+                <div className="flex flex-col items-center gap-4 my-8 mx-4 text-center">
+                  <img
+                    src={process.env.PUBLIC_URL + "/icons/snippet-icon.svg"}
+                  />
+                  <span className="text-xl font-extrabold">
+                    No Snippets saved yet
+                  </span>
+                  <p>
+                    Just drag & drop comments to this sidebar or highlight text
+                    in the summary to add it to the list of snippets.
+                    Alternatively, you can create individual snippets yourself.
+                  </p>
+                </div>
+              ) : null}
               <Droppable droppableId={"sidebar"} key={columns["sidebar"].name}>
                 {(provided, snapshot) => {
                   return (
@@ -150,7 +199,7 @@ export const FeedbackDashboard = () => {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                       className={cx(
-                        "flex flex-col gap-2 min-w-[300px] h-full p-2 rounded-xl",
+                        "flex flex-col gap-2 h-full p-2 rounded-xl",
                         {
                           "bg-offWhite rounded-md": snapshot.isDraggingOver,
                         }
