@@ -14,8 +14,11 @@ export const ExtractFeedbackSidebar = () => {
 
   const showNewSnippetForm = () => {
     setIsCreatingNewSnippet(true);
+    scrollToEndOfList();
+  };
+
+  const scrollToEndOfList = () => {
     setTimeout(() => {
-      // Scroll to the bottom of the snippet container
       if (snippetContainerRef.current) {
         snippetContainerRef.current.scrollTop =
           snippetContainerRef.current.scrollHeight;
@@ -40,7 +43,11 @@ export const ExtractFeedbackSidebar = () => {
         ref={snippetContainerRef}
         className="flex flex-grow flex-col space-y-3 overflow-y-auto scroll-smooth">
         {snippets.map((extract) => (
-          <FeedbackExtract key={extract.id} feedbackExtract={extract} />
+          <FeedbackExtract
+            key={extract.id}
+            feedbackExtract={extract}
+            scrollToEndOfList={scrollToEndOfList}
+          />
         ))}
         {isCreatingNewSnippet && (
           <CreateNewFeedbackSnippet

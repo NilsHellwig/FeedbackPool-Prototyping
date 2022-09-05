@@ -7,18 +7,22 @@ import { useSnippets } from "../contexts/SnippetContext";
 
 interface FeedbackExtractProps {
   feedbackExtract: IFeedbackExtract;
+  scrollToEndOfList: () => void;
 }
 
 export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   feedbackExtract,
+  scrollToEndOfList,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [snippet, setSnippet] = useState(feedbackExtract.text || "");
   const [comment, setComment] = useState(feedbackExtract.comment || "");
+
   const addButtonRef = useRef<HTMLButtonElement>(null);
   const [isAddHovering] = useHover(addButtonRef);
+  const isOwnSnippet = feedbackExtract.author === "John Doe";
 
-  const { setSnippets } = useSnippets();
+  const { snippets, setSnippets } = useSnippets();
 
   const handleSave = () => {
     const updatedSnippet: IFeedbackExtract = {
@@ -66,15 +70,17 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
       )}
       {isEditing && (
         <>
-          <div className="px-4 pb-4 space-y-1">
-            <h3 className="text-sm text-slate-500">Comment:</h3>
-            <textarea
-              placeholder="Add a comment"
-              className="p-4 text-sm bg-slate-100 text-slate-700 w-full min-h-[100px] flex items-start border border-slate-200 rounded"
-              defaultValue={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-          </div>
+          {!isOwnSnippet && (
+            <div className="px-4 pb-4 space-y-1">
+              <h3 className="text-sm text-slate-500">Comment:</h3>
+              <textarea
+                placeholder="Add a comment"
+                className="p-4 text-sm bg-slate-100 text-slate-700 w-full min-h-[100px] flex items-start border border-slate-200 rounded"
+                defaultValue={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </div>
+          )}
           <div className="flex items-center justify-end gap-2 px-4 py-2 border-t border-slate-200">
             <button
               onClick={handleAbort}
@@ -132,7 +138,12 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
               </button>
             )}
             <button
-              onClick={() => setIsEditing(true)}
+              onClick={() => {
+                setIsEditing(true);
+                if (snippets[snippets.length - 1].id === feedbackExtract.id) {
+                  scrollToEndOfList();
+                }
+              }}
               className="bg-slate-200 p-2 rounded-md">
               <Pencil
                 className="text-slate-500"
