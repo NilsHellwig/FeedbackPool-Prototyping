@@ -2,10 +2,8 @@ import { DashboardNav } from "../components/DashboardNav";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Header } from "../components/Header";
 
-import { AssignmentItem } from "../components/AssignmentItem";
-import { IAssignment } from "../types";
 import { useState } from "react";
-import { CaretDown, DotsSixVertical, MagnifyingGlass, Plus } from "phosphor-react";
+import { CaretDown, MagnifyingGlass, Plus } from "phosphor-react";
 import uuid from "react-uuid";
 import cx from "classnames";
 import { DraggableFeedbackSnippet } from "../components/DragabbleFeedbackSnippet";
@@ -180,6 +178,7 @@ export const FeedbackDashboard = () => {
               {columns["sidebar"].items.length < 1 && !dragIsActive ? (
                 <div className="flex flex-col items-center gap-4 my-8 mx-4 text-center">
                   <img
+                  alt="icon of a snippet"
                     src={process.env.PUBLIC_URL + "/icons/snippet-icon.svg"}
                   />
                   <span className="text-xl font-extrabold">

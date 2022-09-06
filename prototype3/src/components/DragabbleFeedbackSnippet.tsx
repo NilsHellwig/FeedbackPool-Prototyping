@@ -1,6 +1,5 @@
 import { DotsSixVertical, Tag, X } from "phosphor-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 interface DraggableFeedbackSnippetProps {
   extractedText: string;
