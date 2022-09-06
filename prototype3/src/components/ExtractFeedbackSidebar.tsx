@@ -51,6 +51,7 @@ export const ExtractFeedbackSidebar = () => {
         ))}
         {isCreatingNewSnippet && (
           <CreateNewFeedbackSnippet
+            isOwnSnippet={true}
             handleAbort={() => setIsCreatingNewSnippet(false)}
             handleSave={(snippet: IFeedbackExtract) => {
               setSnippets((prev) => [...prev, snippet]);

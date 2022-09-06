@@ -1,10 +1,9 @@
-import { Check, Pencil, Plus, X } from "phosphor-react";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { useHover } from "../hooks/use-hover";
-import { IFeedbackExtract, ILabel } from "../types";
 import cx from "classnames";
+import { Check, Pencil, Plus, X } from "phosphor-react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useSnippets } from "../contexts/SnippetContext";
-import { useOutsideClick } from "../hooks/use-outside-click";
+import { useHover } from "../hooks/use-hover";
+import { IFeedbackExtract } from "../types";
 import { EditFeedbackExtractForm } from "./EditFeedbackExtractForm";
 
 interface FeedbackExtractProps {
@@ -17,28 +16,15 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   scrollToEndOfList,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isLabelsSelectorOpen, setIsLabelsSelectorOpen] = useState(false);
-  const [snippet, setSnippet] = useState(feedbackExtract.text || "");
-  const [comment, setComment] = useState(feedbackExtract.comment || "");
-
-  const labelSelectorRef = useRef<HTMLUListElement>(null);
-  useOutsideClick(labelSelectorRef, () => setIsLabelsSelectorOpen(false));
-
   const isOwnSnippet = feedbackExtract.author === "John Doe";
 
-  const { snippets, setSnippets } = useSnippets();
+  const { setSnippets } = useSnippets();
 
-  const handleSave = () => {
-    const updatedSnippet: IFeedbackExtract = {
-      ...feedbackExtract,
-      text: snippet,
-      comment,
-    };
-
+  const handleSave = (snippet: IFeedbackExtract) => {
     setSnippets((prev) => {
       const index = prev.findIndex((s) => s.id === feedbackExtract.id);
       const updatedSnippets = [...prev];
-      updatedSnippets[index] = updatedSnippet;
+      updatedSnippets[index] = snippet;
       return updatedSnippets;
     });
 
@@ -47,7 +33,6 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
 
   const handleAbort = () => {
     setIsEditing(false);
-    setComment(feedbackExtract.comment || "");
   };
 
   return (
@@ -61,7 +46,7 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
         />
       ) : (
         <>
-          <p className="p-4 text-sm text-slate-700">{snippet}</p>
+          <p className="p-4 text-sm text-slate-700">{feedbackExtract.text}</p>
           {feedbackExtract.comment && (
             <div className="px-4 pb-4">
               <p className="p-4 text-sm text-slate-700 bg-slate-100 border border-slate-200 rounded">

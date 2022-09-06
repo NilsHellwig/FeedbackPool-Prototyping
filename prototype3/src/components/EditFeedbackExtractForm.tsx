@@ -1,53 +1,54 @@
 import { Check, Plus, X } from "phosphor-react";
 import { useRef, useState } from "react";
 import { useSnippets } from "../contexts/SnippetContext";
+import { useOutsideClick } from "../hooks/use-outside-click";
 import { IFeedbackExtract, ILabel } from "../types";
+import { v4 as uuidv4 } from "uuid";
 
 interface EditFeedbackExtractFormProps {
   isOwnSnippet: boolean;
-  feedbackExtract: IFeedbackExtract;
+  feedbackExtract?: IFeedbackExtract;
   handleAbort: () => void;
-  handleSave: () => void;
+  handleSave: (snippet: IFeedbackExtract) => void;
 }
 
 export const EditFeedbackExtractForm: React.FC<
   EditFeedbackExtractFormProps
 > = ({ isOwnSnippet, feedbackExtract, handleAbort, handleSave }) => {
-  const [snippet, setSnippet] = useState(feedbackExtract.text || "");
-  const [comment, setComment] = useState(feedbackExtract.comment || "");
+  const [text, setText] = useState(feedbackExtract?.text || "");
+  const [comment, setComment] = useState(feedbackExtract?.comment || "");
+  const [labels, setLabels] = useState<ILabel[]>(feedbackExtract?.labels || []);
+
   const [isLabelsSelectorOpen, setIsLabelsSelectorOpen] = useState(false);
 
-  const { setSnippets, availableLabels } = useSnippets();
+  const { availableLabels } = useSnippets();
 
   const labelSelectorRef = useRef<HTMLUListElement>(null);
+  useOutsideClick(labelSelectorRef, () => setIsLabelsSelectorOpen(false));
 
   const areLabelsAvailable =
-    availableLabels.filter(
-      (label) => !feedbackExtract.labels.some((l) => l.id === label.id)
-    ).length > 0;
+    availableLabels.filter((label) => !labels.some((l) => l.id === label.id))
+      .length > 0;
 
   const addLabelForFeedback = (label: ILabel) => {
-    setSnippets((prev) => {
-      const index = prev.findIndex((s) => s.id === feedbackExtract.id);
-      const updatedSnippets = [...prev];
-      updatedSnippets[index] = {
-        ...updatedSnippets[index],
-        labels: [...updatedSnippets[index].labels, label],
-      };
-      return updatedSnippets;
-    });
+    setLabels((prev) => [...prev, label]);
   };
 
   const removeLabelForFeedback = (label: ILabel) => {
-    setSnippets((prev) => {
-      const index = prev.findIndex((s) => s.id === feedbackExtract.id);
-      const updatedSnippets = [...prev];
-      updatedSnippets[index] = {
-        ...updatedSnippets[index],
-        labels: updatedSnippets[index].labels.filter((l) => l.id !== label.id),
-      };
-      return updatedSnippets;
-    });
+    setLabels((prev) => prev.filter((l) => l.id !== label.id));
+  };
+
+  const onClickedSave = () => {
+    const snippet: IFeedbackExtract = {
+      id: feedbackExtract?.id || uuidv4(),
+      text,
+      author: feedbackExtract?.author || "John Doe",
+      inDashboard: feedbackExtract?.inDashboard || false,
+      labels,
+      comment: comment,
+    };
+
+    handleSave(snippet);
   };
 
   return (
@@ -57,8 +58,8 @@ export const EditFeedbackExtractForm: React.FC<
         <textarea
           placeholder="Add a comment"
           className="p-4 text-sm text-slate-700 w-full min-h-[150px] flex items-start border border-slate-200 rounded"
-          defaultValue={snippet}
-          onChange={(e) => setSnippet(e.target.value)}
+          defaultValue={text}
+          onChange={(e) => setText(e.target.value)}
         />
       </div>
       {!isOwnSnippet && (
@@ -75,7 +76,7 @@ export const EditFeedbackExtractForm: React.FC<
       <div className="px-4 pb-4 space-y-1">
         <h3 className="text-sm text-slate-500">Labels:</h3>
         <ul ref={labelSelectorRef} className="relative flex flex-wrap gap-2">
-          {feedbackExtract?.labels.map((label) => (
+          {labels.map((label) => (
             <li
               key={label.id}
               className="flex items-center gap-2 bg-violet-100 border border-violet-700 text-violet-700 text-sm px-2 py-1 rounded-full">
@@ -98,10 +99,7 @@ export const EditFeedbackExtractForm: React.FC<
             {isLabelsSelectorOpen && areLabelsAvailable && (
               <ul className="absolute w-[350px] left-0 mt-2 flex flex-wrap gap-2 bg-white p-4 border border-gray-100 shadow-xl rounded">
                 {availableLabels
-                  .filter(
-                    (label) =>
-                      !feedbackExtract.labels.some((l) => l.id === label.id)
-                  )
+                  .filter((label) => !labels.some((l) => l.id === label.id))
                   .map((label) => (
                     <li
                       onClick={() => addLabelForFeedback(label)}
@@ -124,7 +122,7 @@ export const EditFeedbackExtractForm: React.FC<
           Discard
         </button>
         <button
-          onClick={handleSave}
+          onClick={onClickedSave}
           className="flex items-center gap-2 px-3 py-2 border border-green-600 text-green-600 bg-green-100 rounded-md text-sm">
           <Check width={14} height={14} weight="bold" />
           Save Changes
