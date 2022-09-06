@@ -174,7 +174,7 @@ export const FeedbackDashboard = () => {
               </div>
             </div>
 
-            <div className="w-[410px]">
+            <div className="w-[410px] h-full">
               {columns["sidebar"].items.length < 1 && !dragIsActive ? (
                 <div className="flex flex-col items-center gap-4 my-8 mx-4 text-center">
                   <img
@@ -198,7 +198,7 @@ export const FeedbackDashboard = () => {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                       className={cx(
-                        "flex flex-col gap-2 h-full p-2 rounded-xl",
+                        "flex flex-col gap-2 p-2 rounded-xl h-full",
                         {
                           "bg-offWhite rounded-md": snapshot.isDraggingOver,
                         }
