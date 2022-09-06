@@ -22,6 +22,7 @@ export const CreateFeedbackSnippetButton = forwardRef<
       text: selectedText,
       author: "John Doe",
       inDashboard: false,
+      labels: [],
     };
 
     setSnippets((prevFeedbackExtracts) => [...prevFeedbackExtracts, snippet]);

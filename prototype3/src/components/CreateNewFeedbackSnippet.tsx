@@ -38,6 +38,7 @@ export const CreateNewFeedbackSnippet: React.FC<
               text: snippetText,
               author: "John Doe",
               inDashboard: false,
+              labels: [],
             };
             handleSave(snippet);
           }}

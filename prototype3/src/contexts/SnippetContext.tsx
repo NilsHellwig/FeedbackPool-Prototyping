@@ -7,18 +7,20 @@ import {
 } from "react";
 import { IFeedbackExtract } from "../types";
 
-const dummyFeedbackExtracts = [
+const dummyFeedbackExtracts: IFeedbackExtract[] = [
   {
     id: "1",
     text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
     author: "Peter Parker",
     inDashboard: false,
+    labels: [],
   },
   {
     id: "2",
     text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
     author: "Peter Parker",
     inDashboard: true,
+    labels: [],
   },
   {
     id: "3",
@@ -27,12 +29,14 @@ const dummyFeedbackExtracts = [
     comment:
       "Accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
     inDashboard: true,
+    labels: [],
   },
   {
     id: "4",
     text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
     author: "Peter Parker",
     inDashboard: false,
+    labels: [],
   },
 ];
 

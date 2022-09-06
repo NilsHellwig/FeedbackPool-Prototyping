@@ -1,9 +1,34 @@
 import { Check, Pencil, Plus, X } from "phosphor-react";
 import { useRef, useState } from "react";
 import { useHover } from "../hooks/use-hover";
-import { IFeedbackExtract } from "../types";
+import { IFeedbackExtract, ILabel } from "../types";
 import cx from "classnames";
 import { useSnippets } from "../contexts/SnippetContext";
+import { useOutsideClick } from "../hooks/use-outside-click";
+
+const availableLabels: ILabel[] = [
+  {
+    id: "77208e73-76a5-41cc-8a8f-fc71e594c0b5",
+    text: "Argumentation",
+    type: "label",
+  },
+  {
+    id: "1f13583c-9051-4d6e-843f-68d53b781aaa",
+    text: "Grammar",
+    type: "label",
+  },
+  {
+    id: "487abf39-2869-4f26-89e9-6d257abe0e3b",
+    text: "Language",
+    type: "label",
+  },
+  {
+    id: "87238dfa-a5fb-43d0-bdc0-69be459899f1",
+    text: "Historical Writing",
+    type: "course",
+  },
+  { id: "d25b6688-e4f9-4245-9bc9-a768b51fd4e8", text: "Essay", type: "type" },
+];
 
 interface FeedbackExtractProps {
   feedbackExtract: IFeedbackExtract;
@@ -15,13 +40,22 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   scrollToEndOfList,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isLabelsSelectorOpen, setIsLabelsSelectorOpen] = useState(false);
   const [snippet, setSnippet] = useState(feedbackExtract.text || "");
   const [comment, setComment] = useState(feedbackExtract.comment || "");
 
   const [addButtonRef, isAddHovering] = useHover<HTMLButtonElement>();
+  const labelSelectorRef = useRef<HTMLUListElement>(null);
+  useOutsideClick(labelSelectorRef, () => setIsLabelsSelectorOpen(false));
+
   const isOwnSnippet = feedbackExtract.author === "John Doe";
 
   const { snippets, setSnippets } = useSnippets();
+
+  const areLabelsAvailable =
+    availableLabels.filter(
+      (label) => !feedbackExtract.labels.some((l) => l.id === label.id)
+    ).length > 0;
 
   const handleSave = () => {
     const updatedSnippet: IFeedbackExtract = {
@@ -43,6 +77,30 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   const handleAbort = () => {
     setIsEditing(false);
     setComment(feedbackExtract.comment || "");
+  };
+
+  const addLabelForFeedback = (label: ILabel) => {
+    setSnippets((prev) => {
+      const index = prev.findIndex((s) => s.id === feedbackExtract.id);
+      const updatedSnippets = [...prev];
+      updatedSnippets[index] = {
+        ...updatedSnippets[index],
+        labels: [...updatedSnippets[index].labels, label],
+      };
+      return updatedSnippets;
+    });
+  };
+
+  const removeLabelForFeedback = (label: ILabel) => {
+    setSnippets((prev) => {
+      const index = prev.findIndex((s) => s.id === feedbackExtract.id);
+      const updatedSnippets = [...prev];
+      updatedSnippets[index] = {
+        ...updatedSnippets[index],
+        labels: updatedSnippets[index].labels.filter((l) => l.id !== label.id),
+      };
+      return updatedSnippets;
+    });
   };
 
   const toggleFromDashboard = (snippetId: string) => {
@@ -128,6 +186,59 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
               />
             </div>
           )}
+          <div className="px-4 pb-4 space-y-1">
+            <h3 className="text-sm text-slate-500">Labels:</h3>
+            <ul
+              ref={labelSelectorRef}
+              className="relative flex flex-wrap gap-2">
+              {feedbackExtract?.labels.map((label) => (
+                <li
+                  key={label.id}
+                  className="flex items-center gap-2 bg-violet-100 border border-violet-700 text-violet-700 text-sm px-2 py-1 rounded-full">
+                  <span
+                    onClick={() => removeLabelForFeedback(label)}
+                    className="hover:bg-violet-700/10 rounded-full p-1 cursor-pointer">
+                    <X width={14} height={14} />
+                  </span>
+                  <span>{label.text}</span>
+                </li>
+              ))}
+              <div>
+                {areLabelsAvailable && (
+                  <button
+                    onClick={() =>
+                      setIsLabelsSelectorOpen(!isLabelsSelectorOpen)
+                    }
+                    className="bg-gray-200 text-sm px-2 py-1 rounded flex items-center gap-2">
+                    Add Label <Plus width={14} height={14} weight="bold" />
+                  </button>
+                )}
+                {isLabelsSelectorOpen && (
+                  <ul className="absolute w-[350px] left-0 mt-2 flex flex-wrap gap-2 bg-white p-4 border border-gray-100 shadow-xl rounded">
+                    {availableLabels
+                      .filter(
+                        (label) =>
+                          !feedbackExtract.labels.some((l) => l.id === label.id)
+                      )
+                      .map((label) => (
+                        <li
+                          onClick={() => addLabelForFeedback(label)}
+                          className="flex items-center gap-2 px-2 py-1 border hover:bg-gray-100 border-gray-200 rounded cursor-pointer"
+                          key={label.id}>
+                          <Plus width={14} height={14} weight="bold" />
+                          <span>{label.text}</span>
+                        </li>
+                      ))}
+                    {!areLabelsAvailable && (
+                      <p className="text-gray-600 text-center w-full">
+                        No labels available.
+                      </p>
+                    )}
+                  </ul>
+                )}
+              </div>
+            </ul>
+          </div>
           <div className="flex items-center justify-end gap-2 px-4 py-2 border-t border-slate-200">
             <button
               onClick={handleAbort}

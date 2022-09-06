@@ -12,4 +12,11 @@ export interface IFeedbackExtract {
   comment?: string;
   author: string;
   inDashboard: boolean;
+  labels: ILabel[];
+}
+
+export interface ILabel {
+  id: string;
+  text: string;
+  type: "label" | "type" | "course";
 }

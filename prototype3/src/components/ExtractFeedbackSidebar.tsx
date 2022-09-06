@@ -35,7 +35,7 @@ export const ExtractFeedbackSidebar = () => {
         </label>
         <button
           onClick={showNewSnippetForm}
-          className="flex gap-2 items-center px-4 py-2 rounded bg-violet-800 text-white">
+          className="flex gap-2 items-center px-4 py-2 rounded bg-violet-800 hover:bg-violet-600 text-white">
           Create Snippet <Plus width={14} height={14} weight="bold" />
         </button>
       </div>
