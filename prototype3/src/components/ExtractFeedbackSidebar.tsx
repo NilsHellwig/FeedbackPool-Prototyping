@@ -6,16 +6,22 @@ import { CreateNewFeedbackSnippet } from "./CreateNewFeedbackSnippet";
 import { FeedbackExtract } from "./FeedbackExtract";
 
 export const ExtractFeedbackSidebar = () => {
+  const { snippets, setSnippets } = useSnippets();
   const [isCreatingNewSnippet, setIsCreatingNewSnippet] =
     useState<boolean>(false);
+  const [showOriginals, setShowOriginals] = useState<boolean>(false);
 
-  const { snippets, setSnippets } = useSnippets();
   const snippetContainerRef = useRef<HTMLDivElement>(null);
 
   const showNewSnippetForm = () => {
     setIsCreatingNewSnippet(true);
     scrollToEndOfList();
   };
+
+  // Filter snippets by author "Peter Parker" if showOriginals is true, otherwise return snippets
+  const filteredSnippets = showOriginals
+    ? snippets.filter((s) => s.author === "Peter Parker")
+    : snippets;
 
   const scrollToEndOfList = () => {
     setTimeout(() => {
@@ -30,7 +36,12 @@ export const ExtractFeedbackSidebar = () => {
     <aside className="flex flex-col max-w-[400px] min-w-[400px] space-y-4 overflow-hidden">
       <div className="flex items-center justify-between">
         <label className="space-x-2 cursor-pointer flex items-center">
-          <input type="checkbox" className="w-4 h-4" />
+          <input
+            checked={showOriginals}
+            onChange={() => setShowOriginals(!showOriginals)}
+            type="checkbox"
+            className="w-4 h-4"
+          />
           <span>Show Originals</span>
         </label>
         <button
@@ -42,7 +53,7 @@ export const ExtractFeedbackSidebar = () => {
       <div
         ref={snippetContainerRef}
         className="flex flex-grow flex-col space-y-3 overflow-y-auto scroll-smooth">
-        {snippets.map((extract) => (
+        {filteredSnippets.map((extract) => (
           <FeedbackExtract
             key={extract.id}
             feedbackExtract={extract}
