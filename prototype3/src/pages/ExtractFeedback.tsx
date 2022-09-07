@@ -106,78 +106,72 @@ export const ExtractFeedback = () => {
                 <h2 className="text-xl font-semibold">Feedback Summary</h2>
                 <div
                   ref={summaryRef}
-                  className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6">
+                  className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6 text-justify">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Egestas pretium aenean pharetra magna ac placerat
-                    vestibulum lectus. Enim diam vulputate ut pharetra sit. Nunc
-                    faucibus a pellentesque sit amet. Ultrices neque ornare
-                    aenean euismod elementum. Ac tortor dignissim convallis
-                    aenean et tortor. Augue neque gravida in fermentum. Sit amet
-                    mauris commodo quis imperdiet massa tincidunt nunc. Id porta
-                    nibh venenatis cras sed felis. Facilisi nullam vehicula
-                    ipsum a arcu cursus. Mus mauris vitae ultricies leo. Tortor
-                    posuere ac ut consequat semper viverra nam. Donec et odio
-                    pellentesque diam. Penatibus et magnis dis parturient montes
-                    nascetur ridiculus mus. Ultricies leo integer malesuada nunc
-                    vel risus commodo. Felis eget velit aliquet sagittis id
-                    consectetur. Id donec ultrices tincidunt arcu non sodales
-                    neque. In fermentum et sollicitudin ac orci phasellus. Duis
-                    at consectetur lorem donec massa sapien.
-                  </p>
-                  <p>
-                    Suspendisse in est ante in nibh mauris cursus mattis. Et
-                    odio pellentesque diam volutpat commodo sed. Risus ultricies
-                    tristique nulla aliquet enim tortor. In mollis nunc sed id
-                    semper risus in hendrerit. Et pharetra pharetra massa massa
-                    ultricies. Aenean euismod elementum nisi quis eleifend quam
-                    adipiscing vitae. Adipiscing elit ut aliquam purus sit. Nunc
-                    congue nisi vitae suscipit tellus mauris. Vitae suscipit
-                    tellus mauris a diam maecenas. Ullamcorper morbi tincidunt
-                    ornare massa eget. Massa vitae tortor condimentum lacinia
+                    Good choice of topic, you made a good effort with room for
+                    improvement. Please see my comments in the margin. There is
+                    a lot to say about this topic, good that you stuck to the
+                    word count. Your topic sentences should be at the start of a
+                    paragraph (as in paragraph 2), not at the end (as in
+                    paragraph 1). Your paragraphs are connected smoothly, they
+                    are separate but still related in topic. In paragraph 1 the
+                    description of the visual and campaign is a bit too long,
+                    concentrate on the other parts as well, examples and
+                    analysis are part of it as well. Paragraph 2 reads better,
+                    less description and as well good examples and analysis.
+                    Remember that there are more linking words you could use,
+                    e.g. additionally, further (more), besides, etc. In the
+                    essay, all requirements regarding length, subject visual and
+                    word total were met. Paragraph 1 was interesting to read,
+                    paragraph 2 not so much, as mass consumerism is pretty
+                    obvious. Try to dig into the topic more next time.
                   </p>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="flex flex-row items-center justify-between">
-                  <h2 className="text-xl font-semibold">Greek Mythology</h2>
+                  <h2 className="text-xl font-semibold">
+                    Visual Analysis - Critical Advertisement
+                  </h2>
                   <span className="text-gray-600 text-sm">
                     Submitted on 04.07.22
                   </span>
                 </div>
                 <div
                   ref={essayRef}
-                  className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6">
+                  className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6 text-justify">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Egestas pretium aenean pharetra magna ac placerat
-                    vestibulum lectus. Enim diam vulputate ut pharetra sit. Nunc
-                    faucibus a pellentesque sit amet. Ultrices neque ornare
-                    aenean euismod elementum. Ac tortor dignissim convallis
-                    aenean et tortor. Augue neque gravida in fermentum. Sit amet
-                    mauris commodo quis imperdiet massa tincidunt nunc. Id porta
-                    nibh venenatis cras sed felis. Facilisi nullam vehicula
-                    ipsum a arcu cursus. Mus mauris vitae ultricies leo. Tortor
-                    posuere ac ut consequat semper viverra nam. Donec et odio
-                    pellentesque diam. Penatibus et magnis dis parturient montes
-                    nascetur ridiculus mus. Ultricies leo integer malesuada nunc
-                    vel risus commodo. Felis eget velit aliquet sagittis id
-                    consectetur. Id donec ultrices tincidunt arcu non sodales
-                    neque. In fermentum et sollicitudin ac orci phasellus. Duis
-                    at consectetur lorem donec massa sapien.
+                    Online payment service PayPal advertises their service and
+                    conditions on new billboard posters. Viewing this advert, it
+                    makes kind of sense at first, a payment service
+                    advertisement for women who like to shop online. By putting
+                    yourself in the position of the depicted, some may relate to
+                    the situation of sitting in a spread of all the new things
+                    you really needed. But when the attention is drawn to the
+                    statement “Verrückt?” [‘Crazy?’], it is not immediately
+                    clear what is meant. Reading the subtitle make the situation
+                    clearer, but, subliminally, the obviously very happy looking
+                    woman between a mass of shoes relates to the cliché that
+                    every female in the Western civilisation has an alleged shoe
+                    obsession. The controversial usage of this cliché in
+                    combination with the statement creates the right tension to
+                    keep the advert in mind.
                   </p>
                   <p>
-                    Suspendisse in est ante in nibh mauris cursus mattis. Et
-                    odio pellentesque diam volutpat commodo sed. Risus ultricies
-                    tristique nulla aliquet enim tortor. In mollis nunc sed id
-                    semper risus in hendrerit. Et pharetra pharetra massa massa
-                    ultricies. Aenean euismod elementum nisi quis eleifend quam
-                    adipiscing vitae. Adipiscing elit ut aliquam purus sit. Nunc
-                    congue nisi vitae suscipit tellus mauris. Vitae suscipit
-                    tellus mauris a diam maecenas. Ullamcorper morbi tincidunt
-                    ornare massa eget. Massa vitae tortor condimentum lacinia
+                    Also, the advert represents the omnipresent Western
+                    materialism and mass consumption. Even though that it is
+                    actually positive for an online payment service that buying
+                    is not decreasing, the arrangement of that many items not
+                    only in the background but everywhere in the picture makes
+                    the buying behaviour seem rather excessive. On the other
+                    hand, the advert also shows the working economy and the good
+                    living conditions the Western society has. Being able to buy
+                    such a number of items and having various opportunities to
+                    shop from really increases the quality of living.
+                    Consequently, the advertisement shows Western buying
+                    behaviours and its surroundings in both lights. It seems to
+                    be questionable whether it is positive or negative to depict
+                    such generalizations and aspects for marketing.
                   </p>
                 </div>
               </div>

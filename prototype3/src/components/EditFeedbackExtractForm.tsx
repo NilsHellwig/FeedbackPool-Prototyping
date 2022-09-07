@@ -73,20 +73,20 @@ export const EditFeedbackExtractForm: React.FC<
         />
         {showError && <p className="text-sm text-red-500">{error}</p>}
       </div>
-      {!isOwnSnippet && (
-        <div className="px-4 pb-4 space-y-1">
-          <h3 className="text-sm text-slate-500">Comment:</h3>
-          <textarea
-            placeholder="Add a comment"
-            className="p-4 text-sm bg-slate-100 text-slate-700 w-full min-h-[100px] flex items-start border border-slate-200 rounded"
-            defaultValue={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-        </div>
-      )}
+      <div className="px-4 pb-4 space-y-1">
+        <h3 className="text-sm text-slate-500">Comment:</h3>
+        <textarea
+          placeholder="Add a comment"
+          className="p-4 text-sm bg-slate-100 text-slate-700 w-full min-h-[100px] flex items-start border border-slate-200 rounded"
+          defaultValue={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+      </div>
       <div className="px-4 pb-4 space-y-1">
         <h3 className="text-sm text-slate-500">Labels:</h3>
-        <ul ref={labelSelectorRef} className="relative flex flex-wrap gap-2 items-center">
+        <ul
+          ref={labelSelectorRef}
+          className="relative flex flex-wrap gap-2 items-center">
           {labels.map((label) => (
             <li
               key={label.id}

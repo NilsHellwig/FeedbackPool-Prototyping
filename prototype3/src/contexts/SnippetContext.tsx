@@ -10,31 +10,29 @@ import { IFeedbackExtract, ILabel } from "../types";
 const dummyFeedbackExtracts: IFeedbackExtract[] = [
   {
     id: "1",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
+    text: "Topic sentence? Should contain your claim (not describe the campaign)",
+    author: "James Michael",
     inDashboard: false,
     labels: [],
   },
   {
     id: "2",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
-    inDashboard: true,
+    text: "Remember to indent!",
+    author: "James Michael",
+    inDashboard: false,
     labels: [],
   },
   {
     id: "3",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
-    comment:
-      "Accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    inDashboard: true,
+    text: "Your claim is down here!",
+    author: "James Michael",
+    inDashboard: false,
     labels: [],
   },
   {
     id: "4",
-    text: "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    author: "Peter Parker",
+    text: "There are more elegant linking words out there!",
+    author: "James Michael",
     inDashboard: false,
     labels: [],
   },
@@ -43,25 +41,24 @@ const dummyFeedbackExtracts: IFeedbackExtract[] = [
 const availableLabels: ILabel[] = [
   {
     id: "77208e73-76a5-41cc-8a8f-fc71e594c0b5",
-    text: "Argumentation",
+    text: "Structure",
     type: "label",
   },
   {
     id: "1f13583c-9051-4d6e-843f-68d53b781aaa",
-    text: "Grammar",
+    text: "Formal Error",
     type: "label",
   },
   {
     id: "487abf39-2869-4f26-89e9-6d257abe0e3b",
-    text: "Language",
+    text: "Wording",
     type: "label",
   },
   {
     id: "87238dfa-a5fb-43d0-bdc0-69be459899f1",
-    text: "Historical Writing",
-    type: "course",
+    text: "Grammar",
+    type: "label",
   },
-  { id: "d25b6688-e4f9-4245-9bc9-a768b51fd4e8", text: "Essay", type: "type" },
 ];
 
 interface IFeedbackExtractContext {

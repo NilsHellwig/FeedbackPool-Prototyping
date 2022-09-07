@@ -55,10 +55,12 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
         />
       ) : (
         <>
-          <p className="p-4 text-sm text-slate-700">{feedbackExtract.text}</p>
+          <p className="p-4 text-sm text-slate-700 text-justify">
+            {feedbackExtract.text}
+          </p>
           {feedbackExtract.comment && (
             <div className="px-4 pb-4">
-              <p className="p-4 text-sm text-slate-700 bg-slate-100 border border-slate-200 rounded">
+              <p className="p-4 text-justify text-sm text-slate-700 bg-slate-100 border border-slate-200 rounded">
                 {feedbackExtract.comment}
               </p>
             </div>
