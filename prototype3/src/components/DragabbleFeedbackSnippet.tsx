@@ -14,7 +14,7 @@ export const DraggableFeedbackSnippet: React.FC<
   return (
     <div>
       <div
-        className="flex flex-col justify-between p-4 gap-4 border bg-white rounded-md w-[350px] h-[300px] cursor-pointer"
+        className="flex flex-col justify-between p-4 gap-4 border bg-white rounded-md w-[350px] h-[200px] cursor-pointer"
         onClick={() => {
           setPopupIsOpened(true);
         }}>
@@ -35,7 +35,7 @@ export const DraggableFeedbackSnippet: React.FC<
               <DotsSixVertical size={20} />
             </div>
           </div>
-          <p className="text-justify line-clamp-6">{extractedText}</p>
+          <p className="line-clamp-6">{extractedText}</p>
         </div>
 
         <div>
