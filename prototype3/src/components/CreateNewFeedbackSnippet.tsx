@@ -1,9 +1,5 @@
-import { Check, X } from "phosphor-react";
-import { useState } from "react";
 import { IFeedbackExtract } from "../types";
-import { v4 as uuidv4 } from "uuid";
 import { EditFeedbackExtractForm } from "./EditFeedbackExtractForm";
-import { useSnippets } from "../contexts/SnippetContext";
 
 interface CreateNewFeedbackSnippetProps {
   isOwnSnippet: boolean;

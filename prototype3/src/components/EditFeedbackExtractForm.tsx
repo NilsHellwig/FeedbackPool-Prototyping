@@ -18,6 +18,8 @@ export const EditFeedbackExtractForm: React.FC<
   const [text, setText] = useState(feedbackExtract?.text || "");
   const [comment, setComment] = useState(feedbackExtract?.comment || "");
   const [labels, setLabels] = useState<ILabel[]>(feedbackExtract?.labels || []);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
 
   const [isLabelsSelectorOpen, setIsLabelsSelectorOpen] = useState(false);
 
@@ -39,6 +41,12 @@ export const EditFeedbackExtractForm: React.FC<
   };
 
   const onClickedSave = () => {
+    if (text.trim().length === 0) {
+      setError("Please enter a text for the feedback extract.");
+      setShowError(true);
+      return;
+    }
+
     const snippet: IFeedbackExtract = {
       id: feedbackExtract?.id || uuidv4(),
       text,
@@ -49,6 +57,8 @@ export const EditFeedbackExtractForm: React.FC<
     };
 
     handleSave(snippet);
+    setError("");
+    setShowError(false);
   };
 
   return (
@@ -61,6 +71,7 @@ export const EditFeedbackExtractForm: React.FC<
           defaultValue={text}
           onChange={(e) => setText(e.target.value)}
         />
+        {showError && <p className="text-sm text-red-500">{error}</p>}
       </div>
       {!isOwnSnippet && (
         <div className="px-4 pb-4 space-y-1">

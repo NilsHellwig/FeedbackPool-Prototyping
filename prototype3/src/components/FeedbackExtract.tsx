@@ -1,8 +1,17 @@
 import cx from "classnames";
-import { Check, Pencil, Plus, X } from "phosphor-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import {
+  Check,
+  DotsThree,
+  Pencil,
+  Plus,
+  Trash,
+  TrashSimple,
+  X,
+} from "phosphor-react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { useSnippets } from "../contexts/SnippetContext";
 import { useHover } from "../hooks/use-hover";
+import { useOutsideClick } from "../hooks/use-outside-click";
 import { IFeedbackExtract } from "../types";
 import { EditFeedbackExtractForm } from "./EditFeedbackExtractForm";
 
@@ -15,10 +24,9 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
   feedbackExtract,
   scrollToEndOfList,
 }) => {
+  const { setSnippets } = useSnippets();
   const [isEditing, setIsEditing] = useState(false);
   const isOwnSnippet = feedbackExtract.author === "John Doe";
-
-  const { setSnippets } = useSnippets();
 
   const handleSave = (snippet: IFeedbackExtract) => {
     setSnippets((prev) => {
@@ -71,6 +79,7 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
             feedbackExtract={feedbackExtract}
             setIsEditing={setIsEditing}
             scrollToEndOfList={scrollToEndOfList}
+            isOwnSnippet={isOwnSnippet}
           />
         </>
       )}
@@ -82,15 +91,20 @@ interface FeedbackExtractFooterProps {
   feedbackExtract: IFeedbackExtract;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   scrollToEndOfList: () => void;
+  isOwnSnippet?: boolean;
 }
 
 const FeedbackExtractFooter: React.FC<FeedbackExtractFooterProps> = ({
   feedbackExtract,
   setIsEditing,
   scrollToEndOfList,
+  isOwnSnippet,
 }) => {
-  const [addButtonRef, isAddHovering] = useHover<HTMLButtonElement>();
   const { snippets, setSnippets } = useSnippets();
+  const [addButtonRef, isAddHovering] = useHover<HTMLButtonElement>();
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const menuRef = useRef<HTMLUListElement>(null);
+  useOutsideClick(menuRef, () => setIsMenuVisible(false));
 
   const toggleFromDashboard = (snippetId: string) => {
     setSnippets((prevSnippets) => {
@@ -103,6 +117,12 @@ const FeedbackExtractFooter: React.FC<FeedbackExtractFooterProps> = ({
         }
         return prevSnippet;
       });
+    });
+  };
+
+  const deleteExtract = (snippetId: string) => {
+    setSnippets((prevSnippets) => {
+      return prevSnippets.filter((prevSnippet) => prevSnippet.id !== snippetId);
     });
   };
 
@@ -174,6 +194,32 @@ const FeedbackExtractFooter: React.FC<FeedbackExtractFooterProps> = ({
             weight="bold"
           />
         </button>
+        {isOwnSnippet && (
+          <div className="relative">
+            <button
+              onClick={() => setIsMenuVisible(!isMenuVisible)}
+              className="border border-slate-200 hover:bg-slate-300 p-2 rounded-md">
+              <DotsThree
+                className="text-slate-500"
+                width={18}
+                height={18}
+                weight="bold"
+              />
+            </button>
+            {isMenuVisible && (
+              <ul
+                ref={menuRef}
+                className="w-[200px] bg-white absolute p-2 rounded shadow bottom-0 right-0">
+                <li
+                  className="flex items-center gap-2 cursor-pointer bg-red-100 text-red-500 rounded p-2"
+                  onClick={() => deleteExtract(feedbackExtract.id)}>
+                  <Trash width={18} height={18} weight="bold" />
+                  <span>Löschen</span>
+                </li>
+              </ul>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

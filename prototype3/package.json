@@ -48,9 +48,9 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.8",
     "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8",
-    "@types/uuid": "^8.3.4"
+    "tailwindcss": "^3.1.8"
   }
 }
