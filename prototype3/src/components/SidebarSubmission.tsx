@@ -15,47 +15,50 @@ import { IFeedbackSnippet } from "../types";
 const feedbackSnippetsBase: IFeedbackSnippet[] = [
   {
     id: 0,
-    metaData: [
-      { text: "Argumentation", type: "label", filter: false },
-      { text: "Grammar", type: "label", filter: false },
-      { text: "Language", type: "label", filter: false },
-      { text: "Historical Writing", type: "course", filter: false },
-      { text: "Essay", type: "type", filter: false },
-    ],
+    metaData: [{ text: "Wording", type: "label", filter: false }],
     extractedText:
-      "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    note: "This is an example note. Depending on the quality of the feedback you’ll have to edit quite a lot I suppose.",
+      "Reconsider your wording to make your point (seems to stand out - woolly wording)",
     checked: false,
   },
   {
     id: 1,
-    metaData: [
-      { text: "Argumentation", type: "label", filter: false },
-      { text: "Historical Writing", type: "course", filter: false },
-      { text: "Essay", type: "type", filter: false },
-    ],
+    metaData: [{ text: "Structure", type: "label", filter: false }],
     extractedText:
-      "Diam maecenas sed enim ut sem viverra aliquet. Porttitor lacus luctus accumsan tortor posuere ac. Convallis aenean et tortor at risus viverra adipiscing at.",
-    checked: true,
+      "topic sentence? should contain your claim (not describe the campaign)",
+    checked: false,
+  },
+  {
+    id: 2,
+    metaData: [{ text: "Formal Error", type: "label", filter: false }],
+    extractedText: "Remember to indent!",
+    checked: false,
+  },
+  {
+    id: 3,
+    metaData: [{ text: "Wording", type: "label", filter: false }],
+    extractedText: "There are more elegant linking words out there!",
+    note: "Linking words like: additionally, further (more), besides, etc.",
+    checked: false,
+  },
+  {
+    id: 4,
+    metaData: [{ text: "Wording", type: "label", filter: false }],
+    extractedText: "replace with consumerism",
+    checked: false,
   },
 ];
 
 const availableMetaDataTotalBase: any = [
   {
     id: 0,
-    text: "Historical Writing",
+    text: "Composition - Text Analysis",
     type: "course",
     selected: false,
   },
   { id: 1, text: "Essay", type: "type", selected: false },
-  {
-    id: 2,
-    text: "Argumentation",
-    type: "label",
-    selected: false,
-  },
-  { id: 3, text: "Grammar", type: "label", selected: false },
-  { id: 4, text: "Language", type: "label", selected: false },
+  { id: 2, text: "Wording", type: "label", selected: false },
+  { id: 3, text: "Formal Error", type: "label", selected: false },
+  { id: 4, text: "Structure", type: "label", selected: false },
 ];
 
 export const SidebarSubmission = () => {

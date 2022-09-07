@@ -17,7 +17,10 @@ export const NewSubmissionTopBar = () => {
           <ArrowFatLeft className="text-white" weight="fill" size={20} />
           <section className="text-white">Back</section>
         </div>
-        <p>Untitled New Submission</p>
+        <p className="text-gray-500">
+          Composition - Text Analysis Exercise 2 {"> "}
+          <span className="text-violet-600">Submission</span>
+        </p>
       </div>
       <div className="flex flex-row gap-6">
         <div className="flex flex-row gap-2">
