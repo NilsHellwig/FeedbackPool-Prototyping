@@ -263,11 +263,12 @@ export const SidebarSubmission = () => {
                         .map((label, key) => {
                           return (
                             <div
-                              className="px-2 bg-purple-100 rounded-full"
+                              className="flex flex-row items-center gap-1 py-1 px-2 bg-gray-700 rounded-md"
                               key={key}>
-                              <span className="text-xs text-darkPurple">
-                                {label.text.toUpperCase()}
+                              <span className="text-xs text-white">
+                                {label.text}
                               </span>
+                              <Tag className="text-white"/>
                             </div>
                           );
                         })}

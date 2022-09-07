@@ -211,7 +211,7 @@ export const FeedbackDashboard = () => {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                       className={cx(
-                        "flex flex-col gap-2 p-2 rounded-xl h-max",
+                        "flex flex-col gap-2 p-2 rounded-xl h-fit",
                         {
                           "bg-offWhite rounded-md": snapshot.isDraggingOver,
                         }

@@ -14,7 +14,7 @@ export const DraggableFeedbackSnippet: React.FC<
   return (
     <div>
       <div
-        className="flex flex-col justify-between p-4 gap-4 border bg-white rounded-md w-[350px] h-[200px] cursor-pointer"
+        className="flex flex-col justify-between p-4 gap-4 border bg-white rounded-md w-[350px] h-[300px] cursor-pointer"
         onClick={() => {
           setPopupIsOpened(true);
         }}>
