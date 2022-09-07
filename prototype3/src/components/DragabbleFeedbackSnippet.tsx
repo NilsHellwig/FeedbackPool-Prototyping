@@ -70,25 +70,20 @@ export const DraggableFeedbackSnippet: React.FC<
               </div>
             </div>
             <p>
-              <span className="bg-orange-200">
-                Suspendisse in est ante in nibh mauris cursus mattis. Et odio
-                pellentesque diam volutpat commodo sed.
-              </span>
-              Risus ultricies tristique nulla aliquet enim tortor. In mollis
-              nunc sed id semper risus in hendrerit. Et pharetra pharetra massa
-              massa ultricies. Aenean euismod elementum nisi quis eleifend quam
-              adipiscing vitae. Adipiscing elit ut aliquam purus sit. Nunc
-              congue nisi vitae suscipit tellus mauris. Vitae suscipit tellus
-              mauris a diam maecenas. Ullamcorper morbi tincidunt ornare massa
-              eget. Massa vitae tortor condimentum lacinia quis vel eros donec.
-              Viverra tellus in hac habitasse platea. Mauris rhoncus aenean vel
-              elit scelerisque mauris pellentesque. Purus semper eget duis at
-              tellus. Diam maecenas sed enim ut sem viverra aliquet. Porttitor
-              lacus luctus accumsan tortor posuere ac. Convallis aenean et
-              tortor at risus viverra adipiscing at.Fusce velit lectus,
-              tincidunt in turpis at, vehicula pharetra lorem. Interdum et
-              malesuada fames ac ante ipsum primis in faucibus. Sed faucibus est
-              felis, vitae placerat ex ultricies
+              Also, the advert represents the omnipresent Western materialism
+              and mass consumption. Even though that it is actually positive for
+              an online payment service that buying is not decreasing, the
+              arrangement of that many items not only in the background but
+              everywhere in the picture makes the buying behaviour seem rather
+              excessive. On the other hand, the advert also shows the working
+              economy and the good living conditions the Western society has.
+              Being able to buy such a number of items and having various
+              opportunities to shop from really increases the quality of living.
+              Consequently, the advertisement shows Western buying behaviours
+              and its surroundings in both lights.
+              <span className="bg-orange-200">It seems to be</span> questionable
+              whether it is positive or negative to depict such generalizations
+              and aspects for marketing.
             </p>
           </div>
         </div>

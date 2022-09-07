@@ -12,23 +12,34 @@ const itemsFromBackend = [
   {
     id: uuid(),
     extractedText:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-    metaDataList: ["Geography", "Essay"],
-    labels: ["history", "deserts"],
+      "Reconsider your wording to make your point (seems to stand out - woolly wording)",
+    metaDataList: ["Composition - Text Analysis", "Essay"],
+    labels: ["Wording"],
   },
   {
     id: uuid(),
     extractedText:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
-    metaDataList: ["Greek Mythology", "Essay"],
-    labels: ["structuring"],
+      "topic sentence? should contain your claim (not describe the campaign)",
+    metaDataList: ["Composition - Text Analysis", "Essay"],
+    labels: ["Structure"],
   },
   {
     id: uuid(),
-    extractedText:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-    metaDataList: ["Critical Thinking", "Essay"],
-    labels: ["victory", "deserts"],
+    extractedText: "Remember to indent!",
+    metaDataList: ["Composition - Text Analysis", "Essay"],
+    labels: ["Formal Error"],
+  },
+  {
+    id: uuid(),
+    extractedText: "There are more elegant linking words out there!",
+    metaDataList: ["Composition - Text Analysis", "Essay"],
+    labels: ["Wording"],
+  },
+  {
+    id: uuid(),
+    extractedText: "replace with consumerism",
+    metaDataList: ["Composition - Text Analysis", "Essay"],
+    labels: ["Wording"],
   },
 ];
 
@@ -135,12 +146,9 @@ export const FeedbackDashboard = () => {
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      className={cx(
-                        "snippet-grid p-4 rounded-md",
-                        {
-                          "bg-lightGrey/50": dragIsActive,
-                        }
-                      )}>
+                      className={cx("snippet-grid p-4 rounded-md", {
+                        "bg-lightGrey/50": dragIsActive,
+                      })}>
                       {columns["pool"].items.map((item, index) => {
                         return (
                           <Draggable
@@ -183,7 +191,7 @@ export const FeedbackDashboard = () => {
               {columns["sidebar"].items.length < 1 && !dragIsActive ? (
                 <div className="flex flex-col items-center gap-4 my-8 mx-4 text-center">
                   <img
-                  alt="icon of a snippet"
+                    alt="icon of a snippet"
                     src={process.env.PUBLIC_URL + "/icons/snippet-icon.svg"}
                   />
                   <span className="text-xl font-extrabold">
