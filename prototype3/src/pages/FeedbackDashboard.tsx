@@ -135,7 +135,12 @@ export const FeedbackDashboard = () => {
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      className="flex gap-2">
+                      className={cx(
+                        "snippet-grid p-4 rounded-md",
+                        {
+                          "bg-lightGrey/50": dragIsActive,
+                        }
+                      )}>
                       {columns["pool"].items.map((item, index) => {
                         return (
                           <Draggable
@@ -174,7 +179,7 @@ export const FeedbackDashboard = () => {
               </div>
             </div>
 
-            <div className="w-[410px] h-full">
+            <div className="w-[362px]">
               {columns["sidebar"].items.length < 1 && !dragIsActive ? (
                 <div className="flex flex-col items-center gap-4 my-8 mx-4 text-center">
                   <img
@@ -198,7 +203,7 @@ export const FeedbackDashboard = () => {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                       className={cx(
-                        "flex flex-col gap-2 p-2 rounded-xl h-full",
+                        "flex flex-col gap-2 p-2 rounded-xl h-max",
                         {
                           "bg-offWhite rounded-md": snapshot.isDraggingOver,
                         }

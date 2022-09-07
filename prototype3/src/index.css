@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.snippet-grid {
+  display: grid;
+  grid-template-columns: 350px 350px 350px;
+  gap: 8px;
+}
 
 @font-face {
   font-family: "Inter";
