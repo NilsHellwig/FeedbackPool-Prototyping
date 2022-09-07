@@ -4,6 +4,7 @@ import {
   DotsThree,
   Pencil,
   Plus,
+  Tag,
   Trash,
   TrashSimple,
   X,
@@ -64,13 +65,14 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
           )}
           <div>
             {feedbackExtract.labels.length > 0 && (
-              <div className="flex items-center flex-wrap gap-2 px-4 pb-2 border-slate-200">
+              <div className="flex items-center flex-wrap gap-2 px-4 pb-2">
                 {feedbackExtract.labels.map((label) => (
-                  <span
-                    key={label.id}
-                    className="px-2 py-1 text-xs text-white bg-slate-600 rounded">
-                    {label.text}
-                  </span>
+                  <div className="flex flex-row gap-1 items-center text-white bg-gray-700 rounded py-1 px-2">
+                    <span key={label.id} className="px-2 py-1 text-xs">
+                      {label.text}
+                    </span>
+                    <Tag width={14} height={14} weight="bold" />
+                  </div>
                 ))}
               </div>
             )}

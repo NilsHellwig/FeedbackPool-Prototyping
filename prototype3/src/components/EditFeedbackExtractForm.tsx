@@ -1,4 +1,4 @@
-import { Check, Plus, X } from "phosphor-react";
+import { Check, Plus, Tag, X } from "phosphor-react";
 import { useRef, useState } from "react";
 import { useSnippets } from "../contexts/SnippetContext";
 import { useOutsideClick } from "../hooks/use-outside-click";
@@ -86,24 +86,25 @@ export const EditFeedbackExtractForm: React.FC<
       )}
       <div className="px-4 pb-4 space-y-1">
         <h3 className="text-sm text-slate-500">Labels:</h3>
-        <ul ref={labelSelectorRef} className="relative flex flex-wrap gap-2">
+        <ul ref={labelSelectorRef} className="relative flex flex-wrap gap-2 items-center">
           {labels.map((label) => (
             <li
               key={label.id}
-              className="flex items-center gap-2 bg-violet-100 border border-violet-700 text-violet-700 text-sm px-2 py-1 rounded-full">
+              className="flex items-center gap-1 bg-gray-700 border text-white text-sm px-1 py-1 rounded-md">
               <span
                 onClick={() => removeLabelForFeedback(label)}
-                className="hover:bg-violet-700/10 rounded-full p-1 cursor-pointer">
-                <X width={14} height={14} />
+                className="hover:bg-gray-500 rounded-full p-1 cursor-pointer">
+                <X width={12} height={14} />
               </span>
               <span>{label.text}</span>
+              <Tag width={14} height={14} weight="bold" />
             </li>
           ))}
           <div>
             {areLabelsAvailable && (
               <button
                 onClick={() => setIsLabelsSelectorOpen(!isLabelsSelectorOpen)}
-                className="bg-gray-200 text-sm px-2 py-1 rounded flex items-center gap-2">
+                className="flex flex-row items-center hover:bg-gray-500 bg-gray-400 rounded-full cursor-pointer text-white text-sm px-3 py-1 flex items-center gap-2">
                 Add Label <Plus width={14} height={14} weight="bold" />
               </button>
             )}
@@ -114,10 +115,11 @@ export const EditFeedbackExtractForm: React.FC<
                   .map((label) => (
                     <li
                       onClick={() => addLabelForFeedback(label)}
-                      className="flex items-center gap-2 px-2 py-1 border hover:bg-gray-100 border-gray-200 rounded cursor-pointer"
+                      className="flex items-center gap-2 px-2 py-1 border hover:bg-gray-500 bg-gray-700 rounded-md cursor-pointer text-white"
                       key={label.id}>
                       <Plus width={14} height={14} weight="bold" />
                       <span>{label.text}</span>
+                      <Tag width={14} height={14} weight="bold" />
                     </li>
                   ))}
               </ul>
