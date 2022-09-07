@@ -97,7 +97,7 @@ export const FeedbackDashboard = () => {
 
   return (
     <DragDropContext
-      onDragEnd={(result) => {
+      onDragEnd={(result: any) => {
         setDragIsActive(false);
         onDragEnd(result, columns, setColumns);
       }}
@@ -141,7 +141,7 @@ export const FeedbackDashboard = () => {
                 droppableId={"pool"}
                 key={columns["pool"].name}
                 direction="horizontal">
-                {(provided, snapshot) => {
+                {(provided: any, snapshot: any) => {
                   return (
                     <div
                       {...provided.droppableProps}
@@ -155,7 +155,7 @@ export const FeedbackDashboard = () => {
                             key={item.id}
                             draggableId={item.id}
                             index={index}>
-                            {(provided, snapshot) => {
+                            {(provided: any, snapshot: any) => {
                               return (
                                 <div
                                   ref={provided.innerRef}
@@ -205,7 +205,7 @@ export const FeedbackDashboard = () => {
                 </div>
               ) : null}
               <Droppable droppableId={"sidebar"} key={columns["sidebar"].name}>
-                {(provided, snapshot) => {
+                {(provided: any, snapshot: any) => {
                   return (
                     <div
                       {...provided.droppableProps}
@@ -222,7 +222,7 @@ export const FeedbackDashboard = () => {
                             key={item.id}
                             draggableId={item.id}
                             index={index}>
-                            {(provided, snapshot) => {
+                            {(provided: any, snapshot: any) => {
                               return (
                                 <div
                                   ref={provided.innerRef}
