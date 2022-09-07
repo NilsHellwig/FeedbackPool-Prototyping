@@ -11,6 +11,7 @@ import {
 } from "phosphor-react";
 import { useState } from "react";
 import { IFeedbackSnippet } from "../types";
+import cx from "classnames";
 
 const feedbackSnippetsBase: IFeedbackSnippet[] = [
   {
@@ -251,7 +252,10 @@ export const SidebarSubmission = () => {
           if (snippetHasFilter(snippet)) {
             return (
               <div
-                className="flex flex-col border border-lightGrey rounded-md"
+                className={cx(
+                  "flex flex-col border border-lightGrey rounded-md bg",
+                  { "opacity-20": snippet.checked }
+                )}
                 key={snippet.id}>
                 <div className="flex flex-col p-2">
                   <div className="flex flex-row items-center w-full gap-2 justify-between">
@@ -268,7 +272,7 @@ export const SidebarSubmission = () => {
                               <span className="text-xs text-white">
                                 {label.text}
                               </span>
-                              <Tag className="text-white"/>
+                              <Tag className="text-white" />
                             </div>
                           );
                         })}
