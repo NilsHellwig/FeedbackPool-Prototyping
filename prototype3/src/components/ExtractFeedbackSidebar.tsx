@@ -20,7 +20,7 @@ export const ExtractFeedbackSidebar = () => {
 
   // Filter snippets by author "Peter Parker" if showOriginals is true, otherwise return snippets
   const filteredSnippets = showOriginals
-    ? snippets.filter((s) => s.author === "Peter Parker")
+    ? snippets.filter((s) => s.author === "James Michael")
     : snippets;
 
   const scrollToEndOfList = () => {
