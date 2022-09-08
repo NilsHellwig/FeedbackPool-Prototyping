@@ -4,10 +4,10 @@ import { NewSubmissionTopBar } from "../components/NewSubmissionTopBar";
 
 export const CreateSubmission = () => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header />
       <div className="flex flex-grow">
-        <main className="flex-grow bg-gray-200 p-8">
+        <main className="flex-grow bg-gray-100 p-8">
           <section className="flex flex-col items-start max-w-7xl m-auto space-y-8">
             <NewSubmissionTopBar />
             <div className="bg-white rounded-md flex flex-col gap-4 w-full p-8 h-[1200px]">
@@ -22,7 +22,10 @@ export const CreateSubmission = () => {
                   ignorance." But as technology is constantly advancing and
                   computers are running almost anything, is a college education
                   really necessary? There are people whom have never set foot in
-                  a college and are doing better than people|
+                  a college and are doing better than people
+                  <span className="text-blue-600 animate-pulse duration-75">
+                    |
+                  </span>
                 </p>
               </div>
             </div>

@@ -108,33 +108,35 @@ export const FeedbackDashboard = () => {
         <Header />
         <div className="flex flex-grow">
           <main className="flex-grow bg-gray-100 p-8">
-            <section className="flex flex-col items-start max-w-7xl m-auto space-y-4">
-              <div className="flex flex-row items-center justify-between w-full">
+            <section className="flex flex-col items-start max-w-7xl m-auto space-y-2 flex-grow h-full">
+              <div className="flex flex-row items-center justify-between w-full mb-8">
                 <DashboardNav />
-                <div className="flex flex-row items-center gap-4 p-1 px-3 rounded-full border border-gray-400">
+                <div className="flex flex-row items-center gap-4 pl-2 py-2 pr-3 text-gray-500 text-sm px-3 rounded-full border border-gray-200 bg-white">
                   <MagnifyingGlass size={18} />
                   <span>Search for Feedback Snippet...</span>
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-between w-full">
+              <div className="flex flex-row items-center justify-between w-full pb-4">
                 <div className="flex flex-row gap-4 items-center">
-                  <div className="flex flex-row items-center gap-2 text-white bg-darkGrey p-2 px-3 rounded-full">
+                  <div className="flex flex-row items-center gap-2 text-white bg-gray-700 text-sm cursor-pointer hover:bg-gray-600 p-2 px-4 rounded-full">
                     <span>Type</span>
-                    <CaretDown weight="fill" size={16} />
+                    <CaretDown weight="bold" size={16} />
                   </div>
-                  <div className="flex flex-row items-center gap-2 text-white bg-darkGrey p-2 px-3 rounded-full">
+                  <div className="flex flex-row items-center gap-2 text-white bg-gray-700 text-sm cursor-pointer hover:bg-gray-600 p-2 px-4 rounded-full">
                     <span>Course</span>
-                    <CaretDown weight="fill" size={16} />
+                    <CaretDown weight="bold" size={16} />
                   </div>
-                  <div className="flex flex-row items-center gap-2 text-white bg-darkGrey p-2 px-3 rounded-full">
+                  <div className="flex flex-row items-center gap-2 text-white bg-gray-700 text-sm cursor-pointer hover:bg-gray-600 p-2 px-4 rounded-full">
                     <span>Label</span>
-                    <CaretDown weight="fill" size={16} />
+                    <CaretDown weight="bold" size={16} />
                   </div>
-                  <span className="text-mediumGrey">(no labels selected)</span>
+                  <span className="text-gray-500 uppercase text-xs tracking-wider">
+                    No labels selected
+                  </span>
                 </div>
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-row items-center gap-2">
                   <span>Multi-selection</span>
-                  <div className="w-5 h-5 bg-lightGrey border border-gray-400 rounded-md cursor-pointer"></div>
+                  <div className="w-5 h-5 bg-white border border-gray-400 rounded cursor-pointer"></div>
                 </div>
               </div>
               <Droppable
@@ -146,33 +148,41 @@ export const FeedbackDashboard = () => {
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      className={cx("snippet-grid p-4 rounded-md", {
-                        "bg-lightGrey/50": dragIsActive,
-                      })}>
-                      {columns["pool"].items.map((item, index) => {
-                        return (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}>
-                            {(provided: any, snapshot: any) => {
-                              return (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}>
-                                  <DraggableFeedbackSnippet
-                                    extractedText={item.extractedText}
-                                    metaDataList={item.metaDataList}
-                                    labels={item.labels}
-                                  />
-                                </div>
-                              );
-                            }}
-                          </Draggable>
-                        );
-                      })}
-                      {provided.placeholder}
+                      className={cx(
+                        "flex flex-grow flex-col w-full rounded-xl",
+                        {
+                          "bg-lightGrey/50": dragIsActive,
+                        }
+                      )}>
+                      <div
+                        className={cx(
+                          "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+                        )}>
+                        {columns["pool"].items.map((item, index) => {
+                          return (
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}>
+                              {(provided: any, snapshot: any) => {
+                                return (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}>
+                                    <DraggableFeedbackSnippet
+                                      extractedText={item.extractedText}
+                                      metaDataList={item.metaDataList}
+                                      labels={item.labels}
+                                    />
+                                  </div>
+                                );
+                              }}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
                     </div>
                   );
                 }}
@@ -187,17 +197,17 @@ export const FeedbackDashboard = () => {
               </div>
             </div>
 
-            <div className="w-[362px]">
+            <div className="w-[362px] flex flex-grow flex-col">
               {columns["sidebar"].items.length < 1 && !dragIsActive ? (
                 <div className="flex flex-col items-center gap-4 my-8 mx-4 text-center">
                   <img
                     alt="icon of a snippet"
                     src={process.env.PUBLIC_URL + "/icons/snippet-icon.svg"}
                   />
-                  <span className="text-xl font-extrabold">
+                  <span className="text-xl font-semibold">
                     No Snippets saved yet
                   </span>
-                  <p>
+                  <p className="text-gray-500">
                     Just drag & drop comments to this sidebar or highlight text
                     in the summary to add it to the list of snippets.
                     Alternatively, you can create individual snippets yourself.
@@ -211,9 +221,10 @@ export const FeedbackDashboard = () => {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                       className={cx(
-                        "flex flex-col gap-2 p-2 rounded-xl h-fit",
+                        "flex flex-col gap-2 p-2 rounded-xl h-full",
                         {
-                          "bg-offWhite rounded-md": snapshot.isDraggingOver,
+                          "bg-offWhite rounded-md h-full":
+                            snapshot.isDraggingOver,
                         }
                       )}>
                       {columns["sidebar"].items.map((item: any, index) => {

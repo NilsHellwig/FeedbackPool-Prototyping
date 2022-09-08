@@ -125,7 +125,7 @@ export const SidebarSubmission = () => {
   return (
     <div className="w-[400px] p-4 bg-white border-l-2 border-slate-200">
       <div className="flex flex-row items-center justify-between w-full">
-        <p className="font-bold text-xl">Feedback Snippets</p>
+        <p className="font-semibold text-xl">Feedback Snippets</p>
         <div className="flex flex-row gap-2">
           <div className="flex items-center p-2 bg-offWhite hover:bg-lightGrey  rounded-md cursor-pointer">
             <MagnifyingGlass className="text-mediumGrey" size={14} />
@@ -146,7 +146,7 @@ export const SidebarSubmission = () => {
                 side="bottom"
                 align="end"
                 className="flex flex-col bg-darkGrey shadow-md mt-4 rounded-lg p-4 w-[500px] h-auto">
-                <div className="flex flex-row gap-2 overflow-scroll">
+                <div className="flex flex-row gap-2 overflow-auto">
                   {availableMetaDataTotal.map((item: any) => {
                     if (item.selected) {
                       return (
@@ -183,7 +183,7 @@ export const SidebarSubmission = () => {
                   ) : null}
                 </div>
                 <div className="h-[1px] bg-mediumGrey mt-2 mb-2 rounded-full"></div>
-                <div className="flex flex-col gap2 overflow-scroll">
+                <div className="flex flex-col gap2 overflow-auto">
                   {availableMetaDataTotal.map((item: any) => {
                     return (
                       <div
@@ -241,9 +241,9 @@ export const SidebarSubmission = () => {
         </div>
       </div>
       <div className="flex flex-row w-full mt-6">
-        <p className="text-purple-800 font-bold text-sm">
+        <p className="text-purple-600 font-semibold text-sm">
           {getAmountOfCheckedSnippets()}/{feedbackSnippets.length} Snippets
-          berücksichtigt
+          considered
         </p>
       </div>
       {/* List of comments */}

@@ -12,9 +12,9 @@ export const DraggableFeedbackSnippet: React.FC<
 > = ({ extractedText, metaDataList, labels }) => {
   const [popupIsOpened, setPopupIsOpened] = useState(false);
   return (
-    <div>
+    <div className="h-full">
       <div
-        className="flex flex-col justify-between p-4 gap-4 border bg-white rounded-md w-[350px] h-[300px] cursor-pointer"
+        className="h-full flex flex-col justify-between p-4 gap-4 border bg-white rounded-md cursor-pointer"
         onClick={() => {
           setPopupIsOpened(true);
         }}>
@@ -25,7 +25,7 @@ export const DraggableFeedbackSnippet: React.FC<
                 return (
                   <span
                     key={idx.toString()}
-                    className="flex flex-row items-center gap-2 p-1 px-2 bg-offWhite text-darkGrey rounded-full text-xs">
+                    className="text-xs font-semibold px-2 py-1 rounded-full bg-violet-100 text-violet-600">
                     {meta}
                   </span>
                 );

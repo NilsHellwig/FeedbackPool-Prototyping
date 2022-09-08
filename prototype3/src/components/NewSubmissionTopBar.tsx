@@ -1,5 +1,7 @@
 import {
   ArrowFatLeft,
+  CaretLeft,
+  CaretRight,
   TextAlignCenter,
   TextAlignJustify,
   TextAlignLeft,
@@ -13,12 +15,18 @@ export const NewSubmissionTopBar = () => {
   return (
     <div className="flex flex-row justify-between w-full items-center">
       <div className="flex flex-row items-center gap-4">
-        <div className="flex flex-row items-center gap-2 bg-darkGrey hover:bg-mediumGrey p-2 rounded-md cursor-pointer">
-          <ArrowFatLeft className="text-white" weight="fill" size={20} />
-          <section className="text-white">Back</section>
-        </div>
-        <p className="text-gray-500">
-          Composition - Text Analysis Exercise 2 {"> "}
+        <button className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md">
+          <CaretLeft fill="#fff" width={18} height={18} weight="bold" />
+          Back
+        </button>
+        <p className="text-gray-500 flex items-center gap-2 text-sm">
+          <span>Composition - Text Analysis Exercise 2</span>
+          <CaretRight
+            className="text-gray-500"
+            width={14}
+            height={14}
+            weight="bold"
+          />
           <span className="text-violet-600">Submission</span>
         </p>
       </div>
