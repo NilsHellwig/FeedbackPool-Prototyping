@@ -12,7 +12,9 @@ export const Header = () => {
       </Link>
       <nav>
         <ul className="flex space-x-4">
-          <li className="text-slate-800 cursor-pointer">My Account</li>
+          <Link to="/submission/create">
+            <li className="text-slate-800 cursor-pointer">My Account</li>
+          </Link>
         </ul>
       </nav>
     </header>

@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Header } from "../components/Header";
 
 import { useState } from "react";
-import { CaretDown, MagnifyingGlass, Plus } from "phosphor-react";
+import { CaretDown, Check, MagnifyingGlass, Plus } from "phosphor-react";
 import uuid from "react-uuid";
 import cx from "classnames";
 import { DraggableFeedbackSnippet } from "../components/DragabbleFeedbackSnippet";
@@ -94,6 +94,7 @@ const onDragEnd = (result: any, columns: any, setColumns: any) => {
 export const FeedbackDashboard = () => {
   const [columns, setColumns] = useState(columnsFromBackend);
   const [dragIsActive, setDragIsActive] = useState(false);
+  const [isMultiSelectActive, setIsMultiSelectActive] = useState(false);
 
   return (
     <DragDropContext
@@ -134,9 +135,20 @@ export const FeedbackDashboard = () => {
                     No labels selected
                   </span>
                 </div>
-                <div className="flex flex-row items-center gap-2">
+                <div
+                  onClick={() => setIsMultiSelectActive(!isMultiSelectActive)}
+                  className="flex flex-row items-center gap-2 cursor-pointer select-none">
                   <span>Multi-selection</span>
-                  <div className="w-5 h-5 bg-white border border-gray-400 rounded cursor-pointer"></div>
+                  <div className="relative flex items-center justify-center w-5 h-5 bg-white border border-gray-400 rounded cursor-pointer">
+                    {isMultiSelectActive && (
+                      <Check
+                        width={14}
+                        height={14}
+                        weight="bold"
+                        className="text-violet-500"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
               <Droppable
