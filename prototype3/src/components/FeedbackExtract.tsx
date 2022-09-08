@@ -44,8 +44,29 @@ export const FeedbackExtract: React.FC<FeedbackExtractProps> = ({
     setIsEditing(false);
   };
 
+  const handleMouseOver = () => {
+    let highlightedText = document.querySelector(
+      `span[data-id="${feedbackExtract.id}"]`
+    );
+    if (highlightedText) {
+      highlightedText.classList.add("bg-yellow-300");
+    }
+  };
+
+  const handleMouseOut = () => {
+    let highlightedText = document.querySelector(
+      `span[data-id="${feedbackExtract.id}"]`
+    );
+    if (highlightedText) {
+      highlightedText.classList.remove("bg-yellow-300");
+    }
+  };
+
   return (
-    <div className="bg-white border border-slate-200 hover:border-slate-400 transition-all rounded-lg">
+    <div
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+      className="bg-white border border-slate-200 hover:border-slate-400 transition-all rounded-lg">
       {isEditing ? (
         <EditFeedbackExtractForm
           feedbackExtract={feedbackExtract}

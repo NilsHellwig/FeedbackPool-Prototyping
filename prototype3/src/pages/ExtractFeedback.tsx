@@ -141,37 +141,45 @@ export const ExtractFeedback = () => {
                   ref={essayRef}
                   className="bg-white p-8 rounded-lg space-y-4 text-sm leading-6 text-justify">
                   <p>
-                    Online payment service PayPal advertises their service and
-                    conditions on new billboard posters. Viewing this advert, it
-                    makes kind of sense at first, a payment service
-                    advertisement for women who like to shop online. By putting
-                    yourself in the position of the depicted, some may relate to
-                    the situation of sitting in a spread of all the new things
-                    you really needed. But when the attention is drawn to the
-                    statement “Verrückt?” [‘Crazy?’], it is not immediately
-                    clear what is meant. Reading the subtitle make the situation
-                    clearer, but, subliminally, the obviously very happy looking
-                    woman between a mass of shoes relates to the cliché that
-                    every female in the Western civilisation has an alleged shoe
-                    obsession. The controversial usage of this cliché in
-                    combination with the statement creates the right tension to
-                    keep the advert in mind.
+                    <span data-id="1">
+                      <span data-id="2">Online</span> payment service PayPal
+                      advertises their service and conditions on new billboard
+                      posters. Viewing this advert, it makes kind of sense at
+                      first, a payment service advertisement for women who like
+                      to shop online.
+                    </span>{" "}
+                    By putting yourself in the position of the depicted, some
+                    may relate to the situation of sitting in a spread of all
+                    the new things you really needed. But when the attention is
+                    drawn to the statement “Verrückt?” [‘Crazy?’], it is not
+                    immediately clear what is meant. Reading the subtitle make
+                    the situation clearer, but, subliminally, the obviously very
+                    happy looking
+                    <span data-id="3">
+                      woman between a mass of shoes relates to the cliché that
+                      every female in the Western civilisation has an alleged
+                      shoe obsession.
+                    </span>{" "}
+                    The controversial usage of this cliché in combination with
+                    the statement creates the right tension to keep the advert
+                    in mind.
                   </p>
                   <p>
-                    Also, the advert represents the omnipresent Western
-                    materialism and mass consumption. Even though that it is
-                    actually positive for an online payment service that buying
-                    is not decreasing, the arrangement of that many items not
-                    only in the background but everywhere in the picture makes
-                    the buying behaviour seem rather excessive. On the other
-                    hand, the advert also shows the working economy and the good
-                    living conditions the Western society has. Being able to buy
-                    such a number of items and having various opportunities to
-                    shop from really increases the quality of living.
-                    Consequently, the advertisement shows Western buying
-                    behaviours and its surroundings in both lights. It seems to
-                    be questionable whether it is positive or negative to depict
-                    such generalizations and aspects for marketing.
+                    <span data-id="4">Also,</span> the advert represents the
+                    omnipresent Western materialism and mass consumption. Even
+                    though that it is actually positive for an online payment
+                    service that buying is not decreasing, the arrangement of
+                    that many items not only in the background but everywhere in
+                    the picture makes the buying behaviour seem rather
+                    excessive. On the other hand, the advert also shows the
+                    working economy and the good living conditions the Western
+                    society has. Being able to buy such a number of items and
+                    having various opportunities to shop from really increases
+                    the quality of living. Consequently, the advertisement shows
+                    Western buying behaviours and its surroundings in both
+                    lights. It seems to be questionable whether it is positive
+                    or negative to depict such generalizations and aspects for
+                    marketing.
                   </p>
                 </div>
               </div>
