@@ -1,4 +1,4 @@
-import { Plus } from "phosphor-react";
+import { Check, Plus } from "phosphor-react";
 import { useRef, useState } from "react";
 import { useSnippets } from "../contexts/SnippetContext";
 import { IFeedbackExtract } from "../types";
@@ -35,13 +35,19 @@ export const ExtractFeedbackSidebar = () => {
   return (
     <aside className="flex flex-col max-w-[400px] min-w-[400px] space-y-4 overflow-hidden">
       <div className="flex items-center justify-between">
-        <label className="space-x-2 cursor-pointer flex items-center">
-          <input
-            checked={showOriginals}
-            onChange={() => setShowOriginals(!showOriginals)}
-            type="checkbox"
-            className="w-4 h-4"
-          />
+        <label
+          onClick={() => setShowOriginals(!showOriginals)}
+          className="space-x-2 cursor-pointer flex items-center select-none">
+          <div className="relative flex items-center justify-center w-5 h-5 bg-white border border-gray-400 rounded cursor-pointer">
+            {showOriginals && (
+              <Check
+                width={14}
+                height={14}
+                weight="bold"
+                className="text-violet-500"
+              />
+            )}
+          </div>
           <span>Show Originals</span>
         </label>
         <button
