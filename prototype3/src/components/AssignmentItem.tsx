@@ -9,7 +9,7 @@ export const AssignmentItem: React.FC<AssignmentItemProps> = ({
   assignment,
 }) => {
   return (
-    <div className="flex flex-col justify-between p-4 bg-white border border-slate-200 hover:border-slate-400 transition-all rounded-lg space-y-12 cursor-pointer">
+    <div className="h-full flex flex-col justify-between p-4 bg-white border border-slate-200 hover:border-slate-400 transition-all rounded-lg space-y-12 cursor-pointer">
       <div className="flex flex-col items-start space-y-4">
         <span className="text-xs font-semibold px-2 py-1 rounded-full bg-violet-100 text-violet-600">
           {assignment.course}
@@ -18,7 +18,7 @@ export const AssignmentItem: React.FC<AssignmentItemProps> = ({
       </div>
       <div className="flex flex-col items-end">
         <div className="flex items-center space-x-2">
-          <span className="text-xs">Feedback:</span>
+          <span className="text-xs text-gray-500">Feedback:</span>
           <span
             className={cx("text-xs font-semibold rounded-full px-2 py-[2px]", {
               "bg-green-200 text-green-600":
