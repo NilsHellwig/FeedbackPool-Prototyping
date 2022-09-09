@@ -35,12 +35,6 @@ const itemsFromBackend = [
     metaDataList: ["Composition - Text Analysis", "Essay"],
     labels: ["Wording"],
   },
-  {
-    id: uuid(),
-    extractedText: "replace with consumerism",
-    metaDataList: ["Composition - Text Analysis", "Essay"],
-    labels: ["Wording"],
-  },
 ];
 
 const columnsFromBackend = {

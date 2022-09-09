@@ -15,6 +15,7 @@ import { useHover } from "../hooks/use-hover";
 import { useOutsideClick } from "../hooks/use-outside-click";
 import { IFeedbackExtract } from "../types";
 import { EditFeedbackExtractForm } from "./EditFeedbackExtractForm";
+import { Tooltip } from "./Tooltip";
 
 interface FeedbackExtractProps {
   feedbackExtract: IFeedbackExtract;
@@ -156,15 +157,17 @@ const FeedbackExtractFooter: React.FC<FeedbackExtractFooterProps> = ({
 
     if (!isSnippetInDashboard) {
       return (
-        <>
-          <Plus
-            className="text-slate-900"
-            width={14}
-            height={14}
-            weight="bold"
-          />
-          <span>Add</span>
-        </>
+        <Tooltip text="Add snippet to dashboard">
+          <div className="flex flex-row items-center gap-1">
+            <Plus
+              className="text-slate-900"
+              width={14}
+              height={14}
+              weight="bold"
+            />
+            <span>Add</span>
+          </div>
+        </Tooltip>
       );
     } else {
       if (isAddHovering) {
