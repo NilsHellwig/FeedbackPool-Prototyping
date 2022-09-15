@@ -91,7 +91,7 @@ export const ExtractFeedback = () => {
                 Back
               </button>
               <div className="flex flex-row items-center gap-2 text-sm">
-                <span className="text-gray-500">Essay Greek Mythology</span>
+                <span className="text-gray-500">Visual Analysis - Critical Advertisement</span>
                 <CaretRight
                   className="text-gray-500"
                   width={14}
