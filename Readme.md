@@ -13,4 +13,4 @@ This paper describes the investigation of students’ feedback process in the co
 - The final [Figma](https://www.figma.com/) [file](./02-Refined-Prototype-LoFi/) of our refined low-fidelity prototype (`02-Refined-Prototype-LoFi`)
 - The [source code](./03-Interactive-Prototype-HighFi/) of our interactive prototype (`03-Interactive-Prototype-HighFi`)
 
-A live version of the interactive prototype is available [here](https://alexanderbazo.github.io/FeedbackPool-Prototyping/).
+A live version of the interactive prototype is available [here](https://nilshellwig.github.io/FeedbackPool-Prototyping/).
