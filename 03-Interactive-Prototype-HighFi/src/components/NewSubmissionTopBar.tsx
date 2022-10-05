@@ -1,5 +1,4 @@
 import {
-  ArrowFatLeft,
   CaretLeft,
   CaretRight,
   TextAlignCenter,

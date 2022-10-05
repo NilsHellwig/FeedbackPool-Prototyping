@@ -6,7 +6,6 @@ import {
   Plus,
   Tag,
   Trash,
-  TrashSimple,
   X,
 } from "phosphor-react";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
