@@ -1,7 +1,7 @@
 # Organising Feedback: On the Curation and Management of Feedback in Virtual Learning Environments
 Markus Bink, Martina Emmert, Nils Constantin Hellwig, Nicole Schönwerth, Raphael Wagner
 
-This repository includes supplementing material to our publication _Organising Feedback: On the Curation and Management of Feedback in Virtual Learning Environments_ (2022). Feel free to contact use at `nils-constantin.hellwig@student.ur.de`.
+This repository includes supplementing material to our publication _Organising Feedback: On the Curation and Management of Feedback in Virtual Learning Environments_ (2022). Feel free to contact us at `nils-constantin.hellwig@student.ur.de`.
 
 ## Abstract (for paper)
 
